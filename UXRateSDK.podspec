@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'UXRateSDK'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'AI-powered in-app survey SDK for iOS'
   s.homepage         = 'https://github.com/SVUG-Tech/UXRateSDK'
   s.license          = { :type => 'Proprietary', :text => 'Copyright UXRate. All rights reserved.' }
