@@ -15,7 +15,7 @@ AI-powered in-app survey SDK. Embed conversational surveys into your iOS app wit
 In Xcode: **File → Add Package Dependencies** → paste:
 
 ```
-https://github.com/umutafacan/UXRateSDK.git
+https://github.com/SVUG-Tech/UXRateSDK.git
 ```
 
 Select version **0.1.0** or later.
@@ -24,7 +24,7 @@ Or add to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/umutafacan/UXRateSDK.git", from: "0.1.0")
+    .package(url: "https://github.com/SVUG-Tech/UXRateSDK.git", from: "0.1.0")
 ]
 ```
 
