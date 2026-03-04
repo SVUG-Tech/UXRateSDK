@@ -1,11 +1,25 @@
+# macOS
 .DS_Store
+
+# Xcode / Swift
 .build/
 .swiftpm/
 xcuserdata/
 DerivedData/
 build/
-Pods/
 *.xcworkspace
-node_modules/
+
+# CocoaPods
+Pods/
+
+# Flutter
 .flutter-plugins
 .flutter-plugins-dependencies
+.dart_tool/
+
+# React Native / Node
+node_modules/
+
+# IDE
+.idea/
+.vscode/
