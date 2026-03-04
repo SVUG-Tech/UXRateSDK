@@ -1,0 +1,11 @@
+.DS_Store
+.build/
+.swiftpm/
+xcuserdata/
+DerivedData/
+build/
+Pods/
+*.xcworkspace
+node_modules/
+.flutter-plugins
+.flutter-plugins-dependencies
