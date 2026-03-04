@@ -56,6 +56,8 @@ npm install react-native-uxrate
 cd ios && pod install
 ```
 
+For detailed integration instructions (SwiftUI, UIKit, Flutter, React Native, screen tracking, triggers, troubleshooting), see the **[Integration Guide](./INTEGRATION.md)**.
+
 ## Quick Start
 
 ### Swift / SwiftUI
