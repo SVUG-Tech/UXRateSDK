@@ -11,11 +11,7 @@ import UXRateSDK
 @main
 struct UXRateDemoApp: App {
     init() {
-        UXRate.configure(
-            apiKey: "YOUR_API_KEY",
-            baseURL: URL(string: "https://api.uxrate.app")!,
-            autoTrackScreens: true
-        )
+        UXRate.configure(apiKey: "YOUR_API_KEY")
     }
 
     var body: some Scene {
