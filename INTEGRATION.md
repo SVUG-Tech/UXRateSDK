@@ -32,9 +32,7 @@ Then add `"UXRateSDK"` to your target's dependencies.
 
 ## iOS / SwiftUI Integration
 
-### Path A — Automatic (recommended)
-
-One call in `App.init()`. The SDK auto-attaches a transparent overlay window, detects screen names from your VC hierarchy, and handles everything else.
+One call in `App.init()`. The SDK auto-attaches a transparent overlay window, detects screen names from your view controller hierarchy, and handles everything else.
 
 ```swift
 import SwiftUI
@@ -43,7 +41,7 @@ import UXRateSDK
 @main
 struct MyApp: App {
     init() {
-        UXRate.configure(apiKey: "uxr_xxx", autoTrackScreens: true)
+        UXRate.configure(apiKey: "uxr_xxx")
     }
 
     var body: some Scene {
@@ -54,10 +52,7 @@ struct MyApp: App {
 }
 ```
 
-- No `.environment()` injection needed.
-- No `.surveyOverlay()` needed.
-- Screen names are auto-detected from the active view controller's class name (e.g. `"HomeViewController"`).
-- Use `.surveyScreen("Name")` on any SwiftUI view to give it a cleaner explicit name (optional):
+Screen names are auto-detected from the active view controller's class name (e.g. `"HomeViewController"`). Use `.surveyScreen("Name")` on any SwiftUI view to give it a cleaner explicit name (optional):
 
 ```swift
 struct HomeView: View {
@@ -70,74 +65,31 @@ struct HomeView: View {
 }
 ```
 
----
-
-### Path B — Manual
-
-For apps that want explicit control over when the overlay is visible and which screens are reported.
-
-**1. Configure without auto-tracking (default):**
-
-```swift
-@main
-struct MyApp: App {
-    init() {
-        UXRate.configure(apiKey: "uxr_xxx")  // autoTrackScreens defaults to false
-    }
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
-```
-
-**2. Add the survey overlay once on your root view:**
-
-```swift
-struct ContentView: View {
-    var body: some View {
-        TabView {
-            HomeView()
-                .tabItem { Label("Home", systemImage: "house") }
-            ProfileView()
-                .tabItem { Label("Profile", systemImage: "person") }
-        }
-        .surveyOverlay()   // place once on the root view
-    }
-}
-```
-
-**3. Mark each screen inside its `NavigationStack`:**
-
-```swift
-struct HomeView: View {
-    var body: some View {
-        NavigationStack {
-            List { /* … */ }
-                .surveyScreen("Home")
-        }
-    }
-}
-
-struct ProfileView: View {
-    var body: some View {
-        NavigationStack {
-            VStack { /* … */ }
-                .surveyScreen("Profile")
-        }
-    }
-}
-```
-
 > **Tip:** Place `.surveyScreen()` on the content _inside_ `NavigationStack`, not on the stack itself. This ensures the screen name is re-reported correctly when navigating back.
 
 ---
 
-## UIKit — Screen Name Override
+## iOS / UIKit Integration
 
-When `autoTrackScreens: true`, the SDK infers the screen name from the VC's class name. Override it with `UXRate.setScreen(_:)` from `viewDidAppear`:
+```swift
+import UIKit
+import UXRateSDK
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        UXRate.configure(apiKey: "uxr_xxx")
+        return true
+    }
+}
+```
+
+### Screen Name Override
+
+The SDK infers the screen name from the view controller's class name. Override it with `UXRate.setScreen(_:)` from `viewDidAppear`:
 
 ```swift
 override func viewDidAppear(_ animated: Bool) {
@@ -146,8 +98,13 @@ override func viewDidAppear(_ animated: Bool) {
 }
 ```
 
-- Works with `autoTrackScreens: true` — the override replaces the auto-detected name; visit is counted once.
-- Also works with `autoTrackScreens: false` as a fully manual tracking approach.
+You can also disable automatic screen tracking and track screens entirely manually:
+
+```swift
+UXRate.configure(apiKey: "uxr_xxx", autoTrackScreens: false)
+```
+
+When `autoTrackScreens` is `false`, no view controller swizzle is installed — use `UXRate.setScreen(_:)` in every view controller's `viewDidAppear`.
 
 ---
 
@@ -203,7 +160,7 @@ Surveys are shown based on rules configured in the UXRate dashboard. The SDK eva
 Use `useMockService: true` to get a local mock survey response without a real API key or network connection:
 
 ```swift
-UXRate.configure(apiKey: "demo", autoTrackScreens: true, useMockService: true)
+UXRate.configure(apiKey: "demo", useMockService: true)
 ```
 
 The mock service returns a canned survey that triggers on any screen, so you can verify the full UI flow immediately.
@@ -392,10 +349,6 @@ UXRate.track({ event: 'purchase_complete' });
 
 **Wrong screen name in SwiftUI**
 - Add `.surveyScreen("Name")` to the content view inside your `NavigationStack`.
-
-**Chat text field not tappable**
-- If you are using Path B, make sure `.surveyOverlay()` is placed on a view that is in the main application window (not a secondary or passthrough window).
-- If you are using Path A (`autoTrackScreens: true`), the SDK attaches to the main window automatically — no additional setup is needed.
 
 **Banner visible on every screen in mock mode**
 - Expected behaviour: `useMockService: true` returns a rule that matches all screens. Switch to a real API key when you want rule-filtered display.

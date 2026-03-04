@@ -60,25 +60,55 @@ For detailed integration instructions (SwiftUI, UIKit, Flutter, React Native, sc
 
 ## Quick Start
 
-### Swift / SwiftUI
+### SwiftUI
 
 ```swift
+import SwiftUI
 import UXRateSDK
 
 @main
 struct MyApp: App {
     init() {
-        UXRate.configure(
-            apiKey: "YOUR_API_KEY",
-            baseURL: URL(string: "https://api.uxrate.app")!,
-            autoTrackScreens: true
-        )
+        UXRate.configure(apiKey: "YOUR_API_KEY")
     }
 
     var body: some Scene {
         WindowGroup { ContentView() }
     }
 }
+```
+
+That's it. The SDK auto-attaches its overlay window and tracks screen names automatically.
+
+### UIKit
+
+```swift
+import UIKit
+import UXRateSDK
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        UXRate.configure(apiKey: "YOUR_API_KEY")
+        return true
+    }
+}
+```
+
+### User Identification & Event Tracking
+
+```swift
+// After the user signs in
+UXRate.identify(userId: "user-123", properties: ["plan": "pro"])
+
+// Track custom events for trigger rules
+UXRate.track(event: "purchase_complete")
+
+// Override auto-detected screen name (optional)
+UXRate.setScreen("Checkout")
 ```
 
 ### Flutter
@@ -101,10 +131,10 @@ await UXRate.configure({ apiKey: 'YOUR_API_KEY' });
 
 | Method | Description |
 |--------|-------------|
-| `configure(apiKey:baseURL:autoTrackScreens:)` | Initialize the SDK |
+| `configure(apiKey:)` | Initialize the SDK |
 | `identify(userId:properties:)` | Set user identity for targeting |
 | `track(event:)` | Track custom events |
-| `setScreen(name:)` | Manually set the current screen name |
+| `setScreen(_:)` | Manually set the current screen name |
 
 ## Examples
 
