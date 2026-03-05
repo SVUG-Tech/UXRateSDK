@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1B2C3D4E5F60001 /* UXRateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = A1B2C3D4E5F60002 /* UXRateSDK */; };
+		63BBA6EC2F58D2B30000100B /* UXRateSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 63BBA6EB2F58D2B30000100B /* UXRateSDK */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A1B2C3D4E5F60010 /* UXRateDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UXRateDemo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D4E5F60010 /* UXRateDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UXRateDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -27,17 +27,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1B2C3D4E5F60001 /* UXRateSDK in Frameworks */,
+				63BBA6EC2F58D2B30000100B /* UXRateSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63BBA6EA2F58D2B30000100B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A1B2C3D4E5F60040 = {
 			isa = PBXGroup;
 			children = (
 				A1B2C3D4E5F60020 /* UXRateDemo */,
+				63BBA6EA2F58D2B30000100B /* Frameworks */,
 				A1B2C3D4E5F60050 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,7 +78,7 @@
 			);
 			name = UXRateDemo;
 			packageProductDependencies = (
-				A1B2C3D4E5F60002 /* UXRateSDK */,
+				63BBA6EB2F58D2B30000100B /* UXRateSDK */,
 			);
 			productName = UXRateDemo;
 			productReference = A1B2C3D4E5F60010 /* UXRateDemo.app */;
@@ -101,7 +109,7 @@
 			mainGroup = A1B2C3D4E5F60040;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				A1B2C3D4E5F600C0 /* XCLocalSwiftPackageReference "../../.." */,
+				63BBA6E92F58D2820000100B /* XCLocalSwiftPackageReference "../../../UXRateSDK-iOS/UXRateSDK" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A1B2C3D4E5F60050 /* Products */;
@@ -308,15 +316,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A1B2C3D4E5F600B0 /* Build configuration list for PBXProject "UXRateDemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1B2C3D4E5F600D0 /* Debug */,
-				A1B2C3D4E5F600E0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		A1B2C3D4E5F60070 /* Build configuration list for PBXNativeTarget "UXRateDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -326,19 +325,28 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		A1B2C3D4E5F600B0 /* Build configuration list for PBXProject "UXRateDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3D4E5F600D0 /* Debug */,
+				A1B2C3D4E5F600E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		A1B2C3D4E5F600C0 /* XCLocalSwiftPackageReference "../../.." */ = {
+		63BBA6E92F58D2820000100B /* XCLocalSwiftPackageReference "../../../UXRateSDK-iOS/UXRateSDK" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../..";
+			relativePath = "../../../UXRateSDK-iOS/UXRateSDK";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A1B2C3D4E5F60002 /* UXRateSDK */ = {
+		63BBA6EB2F58D2B30000100B /* UXRateSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A1B2C3D4E5F600C0 /* XCLocalSwiftPackageReference "../../.." */;
+			package = 63BBA6E92F58D2820000100B /* XCLocalSwiftPackageReference "../../../UXRateSDK-iOS/UXRateSDK" */;
 			productName = UXRateSDK;
 		};
 /* End XCSwiftPackageProductDependency section */

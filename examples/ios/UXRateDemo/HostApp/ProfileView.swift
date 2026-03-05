@@ -15,7 +15,6 @@ struct ProfileView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle("Profile")
-            .surveyScreen("Profile")
         }
     }
 }
