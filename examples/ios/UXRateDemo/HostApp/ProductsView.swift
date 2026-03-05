@@ -27,5 +27,6 @@ struct ProductsView: View {
             .padding(.vertical, 4)
         }
         .navigationTitle("Products")
+        .surveyScreen("Products")
     }
 }

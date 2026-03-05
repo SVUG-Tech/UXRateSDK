@@ -8,16 +8,20 @@ import UXRateSDK
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            Tab("Home", systemImage: "house") {
-                HomeView()
+        if #available(iOS 18.0, *) {
+            TabView {
+                Tab("Home", systemImage: "house") {
+                    HomeView()
+                }
+                Tab("Profile", systemImage: "person") {
+                    ProfileView()
+                }
+                Tab("Settings", systemImage: "gear") {
+                    SettingsView()
+                }
             }
-            Tab("Profile", systemImage: "person") {
-                ProfileView()
-            }
-            Tab("Settings", systemImage: "gear") {
-                SettingsView()
-            }
+        } else {
+            // Fallback on earlier versions
         }
     }
 }
