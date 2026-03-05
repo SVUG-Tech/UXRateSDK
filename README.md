@@ -73,12 +73,15 @@ struct MyApp: App {
     }
 
     var body: some Scene {
-        WindowGroup { ContentView() }
+        WindowGroup {
+            ContentView()
+                .surveyScreen("Home")   // required — identifies this screen for surveys
+        }
     }
 }
 ```
 
-That's it. The SDK auto-attaches its overlay window and tracks screen names automatically.
+Screen names in pure SwiftUI apps must be set with `.surveyScreen()` — the SDK cannot auto-detect them because iOS type-erases views internally. For UIKit apps, screen names are auto-detected from the view controller class name.
 
 ### UIKit
 
@@ -107,7 +110,7 @@ UXRate.identify(userId: "user-123", properties: ["plan": "pro"])
 // Track custom events for trigger rules
 UXRate.track(event: "purchase_complete")
 
-// Override auto-detected screen name (optional)
+// Override auto-detected screen name in UIKit (optional)
 UXRate.setScreen("Checkout")
 ```
 
@@ -129,18 +132,20 @@ await UXRate.configure({ apiKey: 'YOUR_API_KEY' });
 
 ## API
 
-| Method | Description |
-|--------|-------------|
+| Method / Modifier | Description |
+|---|---|
 | `configure(apiKey:)` | Initialize the SDK |
 | `identify(userId:properties:)` | Set user identity for targeting |
 | `track(event:)` | Track custom events |
-| `setScreen(_:)` | Manually set the current screen name |
+| `setScreen(_:)` | Manually set the current screen name (UIKit) |
+| `.surveyScreen("Name")` | Identify a SwiftUI view for survey targeting |
 
 ## Examples
 
 See the [`examples/`](./examples) directory for working demo apps:
 
-- [`examples/ios/`](./examples/ios/) — Swift/SwiftUI demo
+- [`examples/ios/`](./examples/ios/) — SwiftUI demo
+- [`examples/ios-uikit/`](./examples/ios-uikit/) — UIKit + SwiftUI hybrid demo
 - [`examples/flutter/`](./examples/flutter/) — Flutter demo
 - [`examples/react-native/`](./examples/react-native/) — React Native demo
 

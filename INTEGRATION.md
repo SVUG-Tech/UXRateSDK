@@ -32,7 +32,7 @@ Then add `"UXRateSDK"` to your target's dependencies.
 
 ## iOS / SwiftUI Integration
 
-One call in `App.init()`. The SDK auto-attaches a transparent overlay window, detects screen names from your view controller hierarchy, and handles everything else.
+One call in `App.init()`. The SDK auto-attaches a transparent overlay window and handles banner display and chat presentation.
 
 ```swift
 import SwiftUI
@@ -52,20 +52,29 @@ struct MyApp: App {
 }
 ```
 
-Screen names are auto-detected from the active view controller's class name (e.g. `"HomeViewController"`). Use `.surveyScreen("Name")` on any SwiftUI view to give it a cleaner explicit name (optional):
+### Screen Tracking
+
+Pure SwiftUI apps use `NavigationStack` and `TabView`, which internally wrap views in hosting controllers with type-erased `AnyView`. The SDK cannot auto-detect screen names in this case — **add `.surveyScreen("Name")` to each screen you want to target with surveys:**
 
 ```swift
 struct HomeView: View {
     var body: some View {
         NavigationStack {
             List { /* … */ }
-                .surveyScreen("Home")   // overrides the auto-detected VC class name
+                .surveyScreen("Home")
+                .navigationTitle("Home")
         }
     }
 }
 ```
 
+The modifier fires once per view lifecycle (first appear only) — state changes and re-renders do not trigger extra visit counts.
+
 > **Tip:** Place `.surveyScreen()` on the content _inside_ `NavigationStack`, not on the stack itself. This ensures the screen name is re-reported correctly when navigating back.
+
+### UIKit Apps Embedding SwiftUI
+
+If your UIKit app pushes SwiftUI views via `UIHostingController(rootView: MyView())`, the SDK auto-detects the screen name from the concrete generic type (e.g. `"MyView"`). No `.surveyScreen()` needed in this case — it works like UIKit auto-tracking.
 
 ---
 
@@ -89,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 ### Screen Name Override
 
-The SDK infers the screen name from the view controller's class name. Override it with `UXRate.setScreen(_:)` from `viewDidAppear`:
+The SDK infers the screen name from the view controller's class name (e.g. `"CheckoutViewController"`). Override it with `UXRate.setScreen(_:)` from `viewDidAppear`:
 
 ```swift
 override func viewDidAppear(_ animated: Bool) {
@@ -347,8 +356,8 @@ UXRate.track({ event: 'purchase_complete' });
 **Wrong screen name auto-detected (UIKit)**
 - Use `UXRate.setScreen("Name")` in `viewDidAppear` to override the auto-detected VC class name.
 
-**Wrong screen name in SwiftUI**
-- Add `.surveyScreen("Name")` to the content view inside your `NavigationStack`.
+**Screen not detected in SwiftUI**
+- Add `.surveyScreen("Name")` to the content view inside your `NavigationStack`. Pure SwiftUI apps cannot auto-detect screen names.
 
 **Banner visible on every screen in mock mode**
 - Expected behaviour: `useMockService: true` returns a rule that matches all screens. Switch to a real API key when you want rule-filtered display.
