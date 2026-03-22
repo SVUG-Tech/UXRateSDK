@@ -54,7 +54,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = uri("https://uxrate.jfrog.io/artifactory/uxrate-android") }
+        maven { url = uri("https://svug-tech.github.io/UXRateSDK") }
     }
 }
 ```
@@ -260,6 +260,7 @@ See the [`examples/`](./examples) directory for working demo apps:
 
 - [`examples/ios/`](./examples/ios/) — SwiftUI demo
 - [`examples/ios-uikit/`](./examples/ios-uikit/) — UIKit + SwiftUI hybrid demo
+- [`examples/android/`](./examples/android/) — Jetpack Compose demo
 - [`examples/flutter/`](./examples/flutter/) — Flutter demo
 - [`examples/react-native/`](./examples/react-native/) — React Native demo
 
