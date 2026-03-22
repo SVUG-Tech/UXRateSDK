@@ -295,7 +295,7 @@ The mock service returns a canned survey that triggers on any screen, so you can
 
 ## Flutter Plugin (`flutter_uxrate`)
 
-> **Runnable demo app:** `flutter_uxrate/example/` — open in VS Code or Android Studio, run `flutter pub get`, then `flutter run` on an iOS simulator.
+> **Supports iOS and Android.** Runnable demo app: `flutter_uxrate/example/` — open in VS Code or Android Studio, run `flutter pub get`, then `flutter run`.
 
 ### Installation
 
@@ -306,7 +306,7 @@ dependencies:
     path: ../flutter_uxrate   # local; replace with pub.dev path for distribution
 ```
 
-Run `flutter pub get` after adding the dependency.
+Run `flutter pub get` after adding the dependency. For iOS, also run `cd ios && pod install`. Android auto-links automatically.
 
 ### Setup
 
@@ -325,7 +325,7 @@ void main() async {
 
 ### Screen Tracking
 
-Flutter runs inside a single `FlutterViewController`, so `autoTrackScreens` cannot distinguish between Dart routes. **Always use manual `UXRate.setScreen` calls.**
+Flutter runs inside a single view controller (iOS: `FlutterViewController`, Android: `FlutterActivity`), so `autoTrackScreens` cannot distinguish between Dart routes. **Always use manual `UXRate.setScreen` calls on both platforms.**
 
 The recommended place is `initState` of each `StatefulWidget` screen:
 
@@ -379,14 +379,15 @@ await UXRate.track(event: 'purchase_complete');
 
 ## React Native Plugin (`react-native-uxrate`)
 
-> **Runnable demo app:** `react-native-uxrate/example/` — run `npm install && cd ios && pod install && cd .. && npx react-native run-ios` to launch on the iOS simulator.
+> **Supports iOS and Android.** Runnable demo app: `react-native-uxrate/example/` — run `npm install`, then `cd ios && pod install && cd .. && npx react-native run-ios` for iOS or `npx react-native run-android` for Android.
 
 ### Installation
 
 ```sh
 npm install react-native-uxrate
-cd ios && pod install
 ```
+
+For iOS, also run `cd ios && pod install`. Android auto-links automatically.
 
 ### Setup
 
@@ -407,7 +408,7 @@ export default function App() {
 
 ### Screen Tracking
 
-React Native runs inside a single `RCTRootViewController`, so `autoTrackScreens` cannot distinguish between JS screens. **Always use manual `UXRate.setScreen` calls.**
+React Native runs inside a single root view controller on both platforms, so `autoTrackScreens` cannot distinguish between JS screens. **Always use manual `UXRate.setScreen` calls.**
 
 **Per-screen with `useFocusEffect` (recommended):**
 
