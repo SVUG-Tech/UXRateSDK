@@ -2,9 +2,15 @@
 
 ## Requirements
 
+**iOS:**
 - iOS 17.0+ / macOS 14.0+
 - Swift 6.0+
 - SwiftUI
+
+**Android:**
+- API 24+ (Android 7.0)
+- Kotlin 2.1+
+- Jetpack Compose
 
 ---
 
@@ -114,6 +120,117 @@ UXRate.configure(apiKey: "uxr_xxx", autoTrackScreens: false)
 ```
 
 When `autoTrackScreens` is `false`, no view controller swizzle is installed — use `UXRate.setScreen(_:)` in every view controller's `viewDidAppear`.
+
+---
+
+## Android / Jetpack Compose Integration
+
+### Installation
+
+1. Add the UXRate Maven repository to your **project-level** `settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://svug-tech.github.io/UXRateSDK") }
+    }
+}
+```
+
+2. Add the dependency to your **module-level** `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation("com.uxrate:uxrate-sdk:0.1.0")
+}
+```
+
+### Setup
+
+Create (or update) your `Application` class and register it in `AndroidManifest.xml`:
+
+```xml
+<application
+    android:name=".MyApp"
+    ... >
+```
+
+```kotlin
+import android.app.Application
+import com.uxrate.sdk.UXRate
+
+class MyApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        UXRate.configure(
+            application = this,
+            apiKey = "uxr_xxx"
+        )
+    }
+}
+```
+
+### Screen Tracking
+
+Activity class names are auto-tracked (e.g. `HomeActivity` → `"Home"`). For single-Activity Compose apps using Navigation Compose, set screens manually:
+
+```kotlin
+@Composable
+fun HomeScreen() {
+    LaunchedEffect(Unit) {
+        UXRate.setScreen("Home")
+    }
+    // ...
+}
+```
+
+You can also disable automatic screen tracking and track screens entirely manually:
+
+```kotlin
+UXRate.configure(
+    application = this,
+    apiKey = "uxr_xxx",
+    autoTrackScreens = false
+)
+```
+
+### Configuration Options
+
+```kotlin
+import com.uxrate.sdk.models.OverlapStrategy
+import com.uxrate.sdk.models.SDKTheme
+
+UXRate.configure(
+    application = this,
+    apiKey = "uxr_xxx",
+    baseURL = "https://app.uxrate.com",           // Custom backend URL
+    autoTrackScreens = true,                       // Auto-track Activity names
+    useMockService = false,                        // Mock data for development
+    overlapStrategy = OverlapStrategy.SHOW_FIRST,  // Multiple survey resolution
+    theme = SDKTheme.AUTO                          // Color scheme: AUTO, LIGHT, DARK
+)
+```
+
+### User Identification (Android)
+
+```kotlin
+UXRate.identify(userId = "user-123", properties = mapOf("plan" to "pro", "locale" to "en-US"))
+```
+
+### Event Tracking (Android)
+
+```kotlin
+UXRate.track(event = "purchase_complete")
+```
+
+### Logging (Android)
+
+```kotlin
+UXRate.loggingEnabled = true   // enable debug logging
+UXRate.loggingEnabled = false  // silence
+```
 
 ---
 
@@ -358,6 +475,9 @@ UXRate.track({ event: 'purchase_complete' });
 
 **Screen not detected in SwiftUI**
 - Add `.surveyScreen("Name")` to the content view inside your `NavigationStack`. Pure SwiftUI apps cannot auto-detect screen names.
+
+**Screen not detected in single-Activity Compose apps (Android)**
+- Single-Activity apps with Navigation Compose use one Activity — auto-tracking sees only the Activity name. Use `UXRate.setScreen("Name")` via `LaunchedEffect` in each screen composable.
 
 **Banner visible on every screen in mock mode**
 - Expected behaviour: `useMockService: true` returns a rule that matches all screens. Switch to a real API key when you want rule-filtered display.
