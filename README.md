@@ -1,14 +1,17 @@
 # UXRateSDK
 
-AI-powered in-app survey SDK. Embed conversational surveys into your iOS app with a single line of code.
+AI-powered in-app survey SDK for **iOS** and **Android**. Embed conversational surveys into your app with a single line of code.
 
-## Requirements
+## Platform Support
 
-- iOS 17.0+
-- Xcode 16+
-- Swift 5.9+
+| Platform | Language | UI Framework | Min Version |
+|----------|----------|-------------|-------------|
+| iOS | Swift 5.9+ | SwiftUI | iOS 17.0+ |
+| Android | Kotlin 2.1+ | Jetpack Compose | API 24 (Android 7.0) |
 
-## Installation
+---
+
+## iOS Installation
 
 ### Swift Package Manager
 
@@ -38,6 +41,34 @@ pod 'UXRateSDK', '~> 0.1.0'
 
 Then run `pod install`.
 
+---
+
+## Android Installation
+
+### Option 1: AAR Download
+
+1. Download the latest `uxrate-sdk-*.aar` from [Releases](https://github.com/SVUG-Tech/UXRateSDK/releases)
+2. Copy the AAR file to your project's `libs/` directory
+3. Add to your `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation(files("libs/uxrate-sdk-<version>.aar"))
+
+    // Required Compose dependencies (if not already included)
+    implementation(platform("androidx.compose:compose-bom:2024.12.01"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.activity:activity-compose:1.9.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+}
+```
+
+---
+
+## Cross-Platform Installation
+
 ### Flutter
 
 Add to your `pubspec.yaml`:
@@ -56,11 +87,13 @@ npm install react-native-uxrate
 cd ios && pod install
 ```
 
-For detailed integration instructions (SwiftUI, UIKit, Flutter, React Native, screen tracking, triggers, troubleshooting), see the **[Integration Guide](./INTEGRATION.md)**.
+For detailed integration instructions (SwiftUI, UIKit, Android, Flutter, React Native, screen tracking, triggers, troubleshooting), see the **[Integration Guide](./INTEGRATION.md)**.
+
+---
 
 ## Quick Start
 
-### SwiftUI
+### iOS — SwiftUI
 
 ```swift
 import SwiftUI
@@ -83,7 +116,7 @@ struct MyApp: App {
 
 Screen names in pure SwiftUI apps must be set with `.surveyScreen()` — the SDK cannot auto-detect them because iOS type-erases views internally. For UIKit apps, screen names are auto-detected from the view controller class name.
 
-### UIKit
+### iOS — UIKit
 
 ```swift
 import UIKit
@@ -101,17 +134,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
+### Android — Kotlin
+
+```kotlin
+import com.uxrate.sdk.UXRate
+
+class MyApp : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        UXRate.configure(
+            application = this,
+            apiKey = "YOUR_API_KEY"
+        )
+    }
+}
+```
+
+Screen names are auto-detected from Activity class names. For manual override:
+
+```kotlin
+UXRate.setScreen(name = "Checkout")
+```
+
 ### User Identification & Event Tracking
 
+**iOS (Swift):**
 ```swift
-// After the user signs in
 UXRate.identify(userId: "user-123", properties: ["plan": "pro"])
-
-// Track custom events for trigger rules
 UXRate.track(event: "purchase_complete")
-
-// Override auto-detected screen name in UIKit (optional)
 UXRate.setScreen("Checkout")
+```
+
+**Android (Kotlin):**
+```kotlin
+UXRate.identify(userId = "user-123", properties = mapOf("plan" to "pro"))
+UXRate.track(event = "purchase_complete")
+UXRate.setScreen(name = "Checkout")
 ```
 
 ### Flutter
@@ -132,13 +190,13 @@ await UXRate.configure({ apiKey: 'YOUR_API_KEY' });
 
 ## API
 
-| Method / Modifier | Description |
-|---|---|
-| `configure(apiKey:)` | Initialize the SDK |
-| `identify(userId:properties:)` | Set user identity for targeting |
-| `track(event:)` | Track custom events |
-| `setScreen(_:)` | Manually set the current screen name (UIKit) |
-| `.surveyScreen("Name")` | Identify a SwiftUI view for survey targeting |
+| Method / Modifier | iOS | Android | Description |
+|---|---|---|---|
+| `configure(apiKey:)` | ✅ | ✅ | Initialize the SDK |
+| `identify(userId:properties:)` | ✅ | ✅ | Set user identity for targeting |
+| `track(event:)` | ✅ | ✅ | Track custom events |
+| `setScreen(_:)` | ✅ | ✅ | Manually set the current screen name |
+| `.surveyScreen("Name")` | ✅ | — | Identify a SwiftUI view for survey targeting |
 
 ## Examples
 
