@@ -106,14 +106,19 @@ dependencies:
   flutter_uxrate: ^0.1.0
 ```
 
-Then run `flutter pub get` followed by `cd ios && pod install`.
+Then run `flutter pub get`. For iOS, also run `cd ios && pod install`.
+
+Both iOS and Android are supported — no additional native setup needed.
 
 ### React Native
 
 ```bash
 npm install react-native-uxrate
-cd ios && pod install
 ```
+
+For iOS, also run `cd ios && pod install`. Android auto-links automatically.
+
+Both iOS and Android are supported out of the box.
 
 For detailed integration instructions (SwiftUI, UIKit, Android, Flutter, React Native, screen tracking, triggers, troubleshooting), see the **[Integration Guide](./INTEGRATION.md)**.
 
