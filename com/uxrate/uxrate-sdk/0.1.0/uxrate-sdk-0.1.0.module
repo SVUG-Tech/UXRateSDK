@@ -1,0 +1,147 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.uxrate",
+    "module": "uxrate-sdk",
+    "version": "0.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.11.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "releaseApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "uxrate-sdk-0.1.0.aar",
+          "url": "uxrate-sdk-0.1.0.aar",
+          "size": 200722,
+          "sha512": "85ecdbc893c4d4dd7af729213e2f57da91daed4b2aba4bebe07242e13e74257074ced0714b9ae05aad0425fe3c6a03f7c13940141fe38211e3b6190fb061be1e",
+          "sha256": "765a7d4aab3cc50f2dfb0a20d8925f0c4ffba5f008c20011afdc48f044ecc15a",
+          "sha1": "7466f2029b1c0db1518b567df04d2cfd25111c21",
+          "md5": "79cf2efa2beb733bb67f07682b325aa6"
+        }
+      ]
+    },
+    {
+      "name": "releaseRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "dependencies": [
+        {
+          "group": "androidx.compose",
+          "module": "compose-bom",
+          "version": {
+            "requires": "2024.12.01"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui"
+        },
+        {
+          "group": "androidx.compose.material3",
+          "module": "material3"
+        },
+        {
+          "group": "androidx.compose.material",
+          "module": "material-icons-core"
+        },
+        {
+          "group": "androidx.compose.ui",
+          "module": "ui-tooling-preview"
+        },
+        {
+          "group": "androidx.activity",
+          "module": "activity-compose",
+          "version": {
+            "requires": "1.9.3"
+          }
+        },
+        {
+          "group": "androidx.lifecycle",
+          "module": "lifecycle-runtime-ktx",
+          "version": {
+            "requires": "2.8.7"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "uxrate-sdk-0.1.0.aar",
+          "url": "uxrate-sdk-0.1.0.aar",
+          "size": 200722,
+          "sha512": "85ecdbc893c4d4dd7af729213e2f57da91daed4b2aba4bebe07242e13e74257074ced0714b9ae05aad0425fe3c6a03f7c13940141fe38211e3b6190fb061be1e",
+          "sha256": "765a7d4aab3cc50f2dfb0a20d8925f0c4ffba5f008c20011afdc48f044ecc15a",
+          "sha1": "7466f2029b1c0db1518b567df04d2cfd25111c21",
+          "md5": "79cf2efa2beb733bb67f07682b325aa6"
+        }
+      ]
+    },
+    {
+      "name": "releaseSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "androidJvm"
+      },
+      "files": [
+        {
+          "name": "uxrate-sdk-0.1.0-sources.jar",
+          "url": "uxrate-sdk-0.1.0-sources.jar",
+          "size": 76171,
+          "sha512": "4fa6aef42e5136d0b5f4ed265662dfa5c3f65444b8d9797fa90dd33fc5912213f41fd84d2e0e4c14a1a296c1297507bb591ce467d565dc4e4a791e64016f1b93",
+          "sha256": "f7b8abaf703b740566dc784565cde41e16e04f5bc4e596853de984d24fc87d2f",
+          "sha1": "490d15a6cb645855f442cc37dd3ac880a5ea29b5",
+          "md5": "5f719b6c43326c5b69d0f0b2ab2183f6"
+        }
+      ]
+    }
+  ]
+}
