@@ -45,36 +45,9 @@ Then run `pod install`.
 
 ## Android Installation
 
-### Option 1: Gradle (GitHub Packages) — Recommended
+### Option 1: Gradle (Maven Central) — Recommended
 
-1. Add the GitHub Packages Maven repository to your **project-level** `settings.gradle.kts`:
-
-```kotlin
-dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.github.com/SVUG-Tech/UXRateSDK-Android")
-            credentials {
-                username = providers.gradleProperty("gpr.user").orNull
-                    ?: System.getenv("GITHUB_USERNAME")
-                password = providers.gradleProperty("gpr.key").orNull
-                    ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-}
-```
-
-2. Add a [GitHub Personal Access Token](https://github.com/settings/tokens) with `read:packages` scope to your `~/.gradle/gradle.properties`:
-
-```properties
-gpr.user=YOUR_GITHUB_USERNAME
-gpr.key=ghp_YOUR_PERSONAL_ACCESS_TOKEN
-```
-
-3. Add the dependency to your **module-level** `build.gradle.kts`:
+Add to your **module-level** `build.gradle.kts`:
 
 ```kotlin
 dependencies {
@@ -82,7 +55,7 @@ dependencies {
 }
 ```
 
-Transitive dependencies (Compose, Coroutines, etc.) are resolved automatically.
+That's it — Maven Central is included by default in Android projects. Transitive dependencies are resolved automatically.
 
 ### Option 2: AAR Download
 
