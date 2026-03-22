@@ -45,9 +45,21 @@ Then run `pod install`.
 
 ## Android Installation
 
-### Option 1: Gradle (Maven Central) — Recommended
+### Option 1: Gradle — Recommended
 
-Add to your **module-level** `build.gradle.kts`:
+1. Add the UXRate repository to your **project-level** `settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://uxrate.jfrog.io/artifactory/uxrate-android") }
+    }
+}
+```
+
+2. Add the dependency to your **module-level** `build.gradle.kts`:
 
 ```kotlin
 dependencies {
@@ -55,7 +67,7 @@ dependencies {
 }
 ```
 
-That's it — Maven Central is included by default in Android projects. Transitive dependencies are resolved automatically.
+No authentication required. Transitive dependencies are resolved automatically.
 
 ### Option 2: AAR Download
 
