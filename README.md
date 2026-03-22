@@ -45,25 +45,68 @@ Then run `pod install`.
 
 ## Android Installation
 
-### Option 1: AAR Download
+### Option 1: Gradle (GitHub Packages) — Recommended
 
-1. Download the latest `uxrate-sdk-*.aar` from [Releases](https://github.com/SVUG-Tech/UXRateSDK/releases)
-2. Copy the AAR file to your project's `libs/` directory
-3. Add to your `build.gradle.kts`:
+1. Add the GitHub Packages Maven repository to your **project-level** `settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/SVUG-Tech/UXRateSDK-Android")
+            credentials {
+                username = providers.gradleProperty("gpr.user").orNull
+                    ?: System.getenv("GITHUB_USERNAME")
+                password = providers.gradleProperty("gpr.key").orNull
+                    ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+}
+```
+
+2. Add a [GitHub Personal Access Token](https://github.com/settings/tokens) with `read:packages` scope to your `~/.gradle/gradle.properties`:
+
+```properties
+gpr.user=YOUR_GITHUB_USERNAME
+gpr.key=ghp_YOUR_PERSONAL_ACCESS_TOKEN
+```
+
+3. Add the dependency to your **module-level** `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation(files("libs/uxrate-sdk-<version>.aar"))
+    implementation("com.uxrate:uxrate-sdk:0.1.0")
+}
+```
 
-    // Required Compose dependencies (if not already included)
+Transitive dependencies (Compose, Coroutines, etc.) are resolved automatically.
+
+### Option 2: AAR Download
+
+1. Download the latest `uxrate-sdk-*.aar` from [Releases](https://github.com/SVUG-Tech/UXRateSDK/releases)
+2. Copy the AAR file to your module's `libs/` directory
+3. Add to your **module-level** `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation(files("libs/uxrate-sdk-0.1.0.aar"))
+
+    // Required transitive dependencies (AAR does not bundle these)
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-core")
+    implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.activity:activity-compose:1.9.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 }
 ```
+
+> **Note:** With the Gradle approach, transitive dependencies are resolved automatically. With AAR download, you must declare them manually as shown above.
 
 ---
 
@@ -136,7 +179,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 ### Android — Kotlin
 
+Register your `Application` class in `AndroidManifest.xml`:
+
+```xml
+<application
+    android:name=".MyApp"
+    ... >
+```
+
+Then configure the SDK:
+
 ```kotlin
+import android.app.Application
 import com.uxrate.sdk.UXRate
 
 class MyApp : Application() {
@@ -150,10 +204,27 @@ class MyApp : Application() {
 }
 ```
 
-Screen names are auto-detected from Activity class names. For manual override:
+Screen names are auto-detected from Activity class names (e.g., `HomeActivity` → `"Home"`). For manual override:
 
 ```kotlin
 UXRate.setScreen(name = "Checkout")
+```
+
+Advanced configuration:
+
+```kotlin
+import com.uxrate.sdk.models.OverlapStrategy
+import com.uxrate.sdk.models.SDKTheme
+
+UXRate.configure(
+    application = this,
+    apiKey = "YOUR_API_KEY",
+    baseURL = "https://app.uxrate.com",           // Custom backend URL
+    autoTrackScreens = true,                       // Auto-track Activity names
+    useMockService = false,                        // Mock data for development
+    overlapStrategy = OverlapStrategy.SHOW_FIRST,  // Multiple survey resolution
+    theme = SDKTheme.AUTO                          // Color scheme: AUTO, LIGHT, DARK
+)
 ```
 
 ### User Identification & Event Tracking
