@@ -206,7 +206,7 @@ class MyApp : Application() {
 }
 ```
 
-Screen names are auto-detected from Activity class names (e.g., `HomeActivity` → `"Home"`). Override with `UXRate.setScreen(name = "Checkout")`.
+> **Jetpack Compose apps** must call `UXRate.setScreen("ScreenName")` on each screen — auto-tracking only detects Activity class names, not Compose navigation destinations. Multi-Activity apps auto-detect screen names (e.g., `HomeActivity` → `"Home"`).
 
 <details>
 <summary>Advanced configuration options</summary>
