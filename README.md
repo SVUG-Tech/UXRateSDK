@@ -206,7 +206,7 @@ class MyApp : Application() {
 }
 ```
 
-> **Jetpack Compose apps** must call `UXRate.setScreen("ScreenName")` on each screen — auto-tracking only detects Activity class names, not Compose navigation destinations. Multi-Activity apps auto-detect screen names (e.g., `HomeActivity` → `"Home"`).
+> **Jetpack Compose apps** — use `SurveyScreen("Name")` composable (from `com.uxrate.sdk.ui`) on each screen. It handles lifecycle automatically, equivalent to iOS `.surveyScreen()`. Multi-Activity apps auto-detect screen names from Activity class names.
 
 <details>
 <summary>Advanced configuration options</summary>
