@@ -206,13 +206,42 @@ class MyApp : Application() {
 }
 ```
 
-> **Jetpack Compose + Navigation (recommended)** — one line auto-tracks all screens:
-> ```kotlin
-> val navController = rememberNavController()
-> navController.TrackScreens()  // auto-tracks all navigation destinations
-> ```
-> **Compose without Navigation** — use `SurveyScreen("Home")` per screen (hides banner on leave, like iOS `.surveyScreen()`).
-> **Multi-Activity apps** — auto-tracked from Activity class names.
+**Screen Tracking** — three options depending on your app architecture:
+
+<table>
+<tr><th>App type</th><th>How it works</th><th>Effort</th></tr>
+<tr>
+<td><b>Compose + Navigation</b></td>
+<td>
+
+```kotlin
+val navController = rememberNavController()
+navController.TrackScreens()  // auto-tracks ALL screens
+```
+</td>
+<td>1 line total</td>
+</tr>
+<tr>
+<td><b>Compose (no Navigation)</b></td>
+<td>
+
+```kotlin
+@Composable
+fun HomeScreen() {
+    SurveyScreen("Home")  // hides banner on leave
+}
+```
+</td>
+<td>1 line per screen</td>
+</tr>
+<tr>
+<td><b>Multi-Activity</b></td>
+<td>Automatic — Activity class names detected<br>(HomeActivity → "Home")</td>
+<td>Zero</td>
+</tr>
+</table>
+
+> See demo apps: [`android-compose`](./examples/android-compose) (Compose + Navigation) and [`android-activities`](./examples/android-activities) (multi-Activity).
 
 <details>
 <summary>Advanced configuration options</summary>
@@ -311,7 +340,8 @@ See the [`examples/`](./examples) directory for working demo apps:
 
 - [`examples/ios/`](./examples/ios/) — SwiftUI demo
 - [`examples/ios-uikit/`](./examples/ios-uikit/) — UIKit + SwiftUI hybrid demo
-- [`examples/android/`](./examples/android/) — Jetpack Compose demo
+- [`examples/android-compose/`](./examples/android-compose/) — Jetpack Compose + Navigation (uses `TrackScreens()`)
+- [`examples/android-activities/`](./examples/android-activities/) — Multi-Activity (auto screen tracking)
 - [`examples/flutter/`](./examples/flutter/) — Flutter demo
 - [`examples/react-native/`](./examples/react-native/) — React Native demo
 

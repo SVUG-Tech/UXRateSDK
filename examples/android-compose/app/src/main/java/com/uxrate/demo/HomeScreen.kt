@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.LocalShipping
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.ShoppingBag
@@ -19,7 +19,6 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,18 +30,11 @@ import com.uxrate.sdk.UXRate
 /**
  * Home tab — survey button should appear here.
  *
- * Key integration points:
- * - UXRate.setScreen("Home") called via LaunchedEffect to report this screen name.
- * - UXRate.track() called when a notable action occurs (Products tapped).
+ * Screen tracking is handled automatically by navController.TrackScreens()
+ * in MainActivity — no per-screen setup needed.
  */
 @Composable
 fun HomeScreen(navController: NavController) {
-    // Report the screen name — must match the pagePattern regex in your
-    // dashboard trigger rule (e.g. "^Home$").
-    LaunchedEffect(Unit) {
-        UXRate.setScreen("Home")
-    }
-
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         // Section header: Browse
         item { SectionHeader("Browse") }
@@ -52,7 +44,6 @@ fun HomeScreen(navController: NavController) {
                 icon = Icons.Outlined.ShoppingBag,
                 label = "Products",
                 onClick = {
-                    // Track the event — can be used in event-based trigger rules.
                     UXRate.track(event = "products_tapped")
                     navController.navigate("products")
                 }
@@ -115,7 +106,7 @@ private fun BrowseRow(icon: ImageVector, label: String, onClick: () -> Unit) {
         },
         trailingContent = {
             Icon(
-                Icons.Filled.ChevronRight,
+                Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )

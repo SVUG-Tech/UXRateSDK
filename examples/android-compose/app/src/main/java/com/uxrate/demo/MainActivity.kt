@@ -31,13 +31,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.uxrate.sdk.ui.TrackScreens
 
 /**
- * Main Activity — hosts the bottom tab navigation with Home, Profile, Settings tabs.
+ * Main Activity — single-Activity Compose app with bottom tab navigation.
  *
- * Mirrors the iOS demo's TabView layout. Screen names are auto-tracked by the SDK
- * from Activity class names, but since we use a single Activity with Compose navigation,
- * we call UXRate.setScreen() manually in each screen composable.
+ * Uses navController.TrackScreens() for automatic screen tracking —
+ * no per-screen boilerplate needed. Route names are auto-capitalized
+ * (e.g., "home" → "Home").
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,6 +85,7 @@ private val tabs = listOf(
 @Composable
 private fun MainScreen() {
     val navController = rememberNavController()
+    navController.TrackScreens()  // one line — auto-tracks all screens
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
