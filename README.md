@@ -8,22 +8,22 @@ AI-powered in-app survey SDK for **iOS** and **Android**. Embed conversational s
 |----------|----------|-------------|-------------|
 | iOS | Swift 5.9+ | SwiftUI | iOS 17.0+ |
 | Android | Kotlin 2.1+ | Jetpack Compose | API 24 (Android 7.0) |
+| Flutter | Dart 3.0+ | — | iOS 17.0+ / API 24 |
+| React Native | JS/TS | — | iOS 17.0+ / API 24 |
 
 ---
 
-## iOS Installation
+## Installation
 
-### Swift Package Manager
+### iOS
 
-In Xcode: **File → Add Package Dependencies** → paste:
+**Swift Package Manager** — In Xcode: **File → Add Package Dependencies** → paste:
 
 ```
 https://github.com/SVUG-Tech/UXRateSDK.git
 ```
 
-Select version **0.1.0** or later.
-
-Or add to your `Package.swift`:
+Or add to `Package.swift`:
 
 ```swift
 dependencies: [
@@ -31,25 +31,18 @@ dependencies: [
 ]
 ```
 
-### CocoaPods
-
-Add to your `Podfile`:
+**CocoaPods** — Add to your `Podfile`:
 
 ```ruby
 pod 'UXRateSDK', '~> 0.1.0'
 ```
 
-Then run `pod install`.
+### Android
 
----
-
-## Android Installation
-
-### Option 1: Gradle — Recommended
-
-1. Add the UXRate repository to your **project-level** `settings.gradle.kts`:
+Add the UXRate Maven repository and dependency:
 
 ```kotlin
+// settings.gradle.kts (project-level)
 dependencyResolutionManagement {
     repositories {
         google()
@@ -57,29 +50,27 @@ dependencyResolutionManagement {
         maven { url = uri("https://svug-tech.github.io/UXRateSDK") }
     }
 }
-```
 
-2. Add the dependency to your **module-level** `build.gradle.kts`:
-
-```kotlin
+// build.gradle.kts (module-level)
 dependencies {
     implementation("com.uxrate:uxrate-sdk:0.1.0")
 }
 ```
 
-No authentication required. Transitive dependencies are resolved automatically.
+No authentication required. Transitive dependencies resolve automatically.
 
-### Option 2: AAR Download
+<details>
+<summary>Manual AAR download (alternative)</summary>
 
-1. Download the latest `uxrate-sdk-*.aar` from [Releases](https://github.com/SVUG-Tech/UXRateSDK/releases)
-2. Copy the AAR file to your module's `libs/` directory
-3. Add to your **module-level** `build.gradle.kts`:
+1. Download `uxrate-sdk-*.aar` from [Releases](https://github.com/SVUG-Tech/UXRateSDK/releases)
+2. Copy to your module's `libs/` directory
+3. Add dependencies manually:
 
 ```kotlin
 dependencies {
     implementation(files("libs/uxrate-sdk-0.1.0.aar"))
 
-    // Required transitive dependencies (AAR does not bundle these)
+    // Required transitive dependencies
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3")
@@ -90,46 +81,22 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 }
 ```
-
-> **Note:** With the Gradle approach, transitive dependencies are resolved automatically. With AAR download, you must declare them manually as shown above.
-
----
-
-## Cross-Platform Installation
+</details>
 
 ### Flutter
 
-Add to your `pubspec.yaml`:
-
 ```yaml
+# pubspec.yaml
 dependencies:
-  flutter_uxrate:
-    git:
-      url: https://github.com/SVUG-Tech/flutter-uxrate.git
-      ref: 0.1.0
+  flutter_uxrate: ^0.1.0
 ```
-
-Then run `flutter pub get`. For iOS, also run `cd ios && pod install`.
-
-For Android, add the UXRate Maven repo to your `android/build.gradle`:
-
-```groovy
-repositories {
-    maven { url 'https://svug-tech.github.io/UXRateSDK' }
-}
-```
-
-Both iOS and Android are supported. See the [flutter-uxrate repo](https://github.com/SVUG-Tech/flutter-uxrate) for full docs.
-
-### React Native
 
 ```bash
-npm install react-native-uxrate
+flutter pub get
+cd ios && pod install   # iOS only
 ```
 
-For iOS, also run `cd ios && pod install`.
-
-For Android, add the UXRate Maven repo to your `android/build.gradle`:
+For Android, add the UXRate Maven repository to your **android/build.gradle**:
 
 ```groovy
 allprojects {
@@ -139,9 +106,26 @@ allprojects {
 }
 ```
 
-Android auto-links automatically. Both platforms supported out of the box. See the [react-native-uxrate repo](https://github.com/SVUG-Tech/react-native-uxrate) for full docs.
+> **Note:** Flutter runs inside a single native ViewController/Activity, so auto screen tracking won't distinguish between Flutter routes. Use `UXRate.setScreen('ScreenName')` manually on each route.
 
-For detailed integration instructions (SwiftUI, UIKit, Android, Flutter, React Native, screen tracking, triggers, troubleshooting), see the **[Integration Guide](./INTEGRATION.md)**.
+### React Native
+
+```bash
+npm install react-native-uxrate
+cd ios && pod install   # iOS only
+```
+
+For Android, add the UXRate Maven repository to your **android/build.gradle**:
+
+```groovy
+allprojects {
+    repositories {
+        maven { url 'https://svug-tech.github.io/UXRateSDK' }
+    }
+}
+```
+
+> **Note:** Like Flutter, React Native uses a single native root. Use `UXRate.setScreen('ScreenName')` on navigation events rather than relying on auto-tracking.
 
 ---
 
@@ -162,13 +146,13 @@ struct MyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .surveyScreen("Home")   // required — identifies this screen for surveys
+                .surveyScreen("Home")
         }
     }
 }
 ```
 
-Screen names in pure SwiftUI apps must be set with `.surveyScreen()` — the SDK cannot auto-detect them because iOS type-erases views internally. For UIKit apps, screen names are auto-detected from the view controller class name.
+> SwiftUI apps must use `.surveyScreen()` to identify screens — the SDK cannot auto-detect them because iOS type-erases views internally. UIKit apps auto-detect screen names from view controller class names.
 
 ### iOS — UIKit
 
@@ -188,17 +172,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 ```
 
-### Android — Kotlin
+### Android
 
 Register your `Application` class in `AndroidManifest.xml`:
 
 ```xml
-<application
-    android:name=".MyApp"
-    ... >
+<application android:name=".MyApp" ... >
 ```
-
-Then configure the SDK:
 
 ```kotlin
 import android.app.Application
@@ -215,13 +195,10 @@ class MyApp : Application() {
 }
 ```
 
-Screen names are auto-detected from Activity class names (e.g., `HomeActivity` → `"Home"`). For manual override:
+Screen names are auto-detected from Activity class names (e.g., `HomeActivity` → `"Home"`). Override with `UXRate.setScreen(name = "Checkout")`.
 
-```kotlin
-UXRate.setScreen(name = "Checkout")
-```
-
-Advanced configuration:
+<details>
+<summary>Advanced configuration options</summary>
 
 ```kotlin
 import com.uxrate.sdk.models.OverlapStrategy
@@ -237,29 +214,25 @@ UXRate.configure(
     theme = SDKTheme.AUTO                          // Color scheme: AUTO, LIGHT, DARK
 )
 ```
-
-### User Identification & Event Tracking
-
-**iOS (Swift):**
-```swift
-UXRate.identify(userId: "user-123", properties: ["plan": "pro"])
-UXRate.track(event: "purchase_complete")
-UXRate.setScreen("Checkout")
-```
-
-**Android (Kotlin):**
-```kotlin
-UXRate.identify(userId = "user-123", properties = mapOf("plan" to "pro"))
-UXRate.track(event = "purchase_complete")
-UXRate.setScreen(name = "Checkout")
-```
+</details>
 
 ### Flutter
 
 ```dart
 import 'package:flutter_uxrate/flutter_uxrate.dart';
 
-await UXRate.configure(apiKey: 'YOUR_API_KEY');
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UXRate.configure(apiKey: 'YOUR_API_KEY');
+  runApp(const MyApp());
+}
+
+// On each screen:
+@override
+void initState() {
+  super.initState();
+  UXRate.setScreen('Home');
+}
 ```
 
 ### React Native
@@ -267,18 +240,53 @@ await UXRate.configure(apiKey: 'YOUR_API_KEY');
 ```javascript
 import { UXRate } from 'react-native-uxrate';
 
-await UXRate.configure({ apiKey: 'YOUR_API_KEY' });
+// App startup
+useEffect(() => {
+  UXRate.configure({ apiKey: 'YOUR_API_KEY' });
+}, []);
+
+// On each screen (with React Navigation)
+useFocusEffect(() => {
+  UXRate.setScreen('Home');
+});
 ```
 
-## API
+---
 
-| Method / Modifier | iOS | Android | Description |
-|---|---|---|---|
-| `configure(apiKey:)` | ✅ | ✅ | Initialize the SDK |
-| `identify(userId:properties:)` | ✅ | ✅ | Set user identity for targeting |
-| `track(event:)` | ✅ | ✅ | Track custom events |
-| `setScreen(_:)` | ✅ | ✅ | Manually set the current screen name |
-| `.surveyScreen("Name")` | ✅ | — | Identify a SwiftUI view for survey targeting |
+## User Identification & Event Tracking
+
+These methods work identically across all platforms:
+
+| | iOS (Swift) | Android (Kotlin) | Flutter (Dart) | React Native (JS) |
+|---|---|---|---|---|
+| **Identify** | `UXRate.identify(userId: "u1", properties: ["plan": "pro"])` | `UXRate.identify(userId = "u1", properties = mapOf("plan" to "pro"))` | `UXRate.identify(userId: 'u1', properties: {'plan': 'pro'})` | `UXRate.identify({ userId: 'u1', properties: { plan: 'pro' } })` |
+| **Track** | `UXRate.track(event: "purchase")` | `UXRate.track(event = "purchase")` | `UXRate.track(event: 'purchase')` | `UXRate.track({ event: 'purchase' })` |
+| **Screen** | `UXRate.setScreen("Cart")` | `UXRate.setScreen(name = "Cart")` | `UXRate.setScreen('Cart')` | `UXRate.setScreen('Cart')` |
+
+---
+
+## API Reference
+
+| Method / Modifier | iOS | Android | Flutter | RN | Description |
+|---|---|---|---|---|---|
+| `configure(apiKey:)` | ✅ | ✅ | ✅ | ✅ | Initialize the SDK |
+| `identify(userId:properties:)` | ✅ | ✅ | ✅ | ✅ | Set user identity for targeting |
+| `track(event:)` | ✅ | ✅ | ✅ | ✅ | Track custom events |
+| `setScreen(_:)` | ✅ | ✅ | ✅ | ✅ | Manually set the current screen name |
+| `.surveyScreen("Name")` | ✅ | — | — | — | SwiftUI view modifier for screen identification |
+
+---
+
+## How It Works
+
+1. **Configure** — SDK fetches survey config from the backend
+2. **Screen tracking** — Screen names are detected (auto or manual)
+3. **Trigger evaluation** — SDK checks if any survey matches the current screen, events, timing, and user segment
+4. **Banner** — A non-intrusive banner overlay appears on matching screens
+5. **Chat** — Tapping the banner opens an AI-powered survey conversation
+6. **Frequency capping** — Per-user, per-session, cooldown, and daily caps prevent survey fatigue
+
+---
 
 ## Examples
 
@@ -289,6 +297,10 @@ See the [`examples/`](./examples) directory for working demo apps:
 - [`examples/android/`](./examples/android/) — Jetpack Compose demo
 - [`examples/flutter/`](./examples/flutter/) — Flutter demo
 - [`examples/react-native/`](./examples/react-native/) — React Native demo
+
+For detailed integration instructions (screen tracking patterns, trigger configuration, troubleshooting), see the **[Integration Guide](./INTEGRATION.md)**.
+
+---
 
 ## License
 
