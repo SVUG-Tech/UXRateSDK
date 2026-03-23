@@ -103,12 +103,23 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_uxrate: ^0.1.0
+  flutter_uxrate:
+    git:
+      url: https://github.com/SVUG-Tech/flutter-uxrate.git
+      ref: 0.1.0
 ```
 
 Then run `flutter pub get`. For iOS, also run `cd ios && pod install`.
 
-Both iOS and Android are supported — no additional native setup needed.
+For Android, add the UXRate Maven repo to your `android/build.gradle`:
+
+```groovy
+repositories {
+    maven { url 'https://svug-tech.github.io/UXRateSDK' }
+}
+```
+
+Both iOS and Android are supported. See the [flutter-uxrate repo](https://github.com/SVUG-Tech/flutter-uxrate) for full docs.
 
 ### React Native
 
@@ -116,9 +127,19 @@ Both iOS and Android are supported — no additional native setup needed.
 npm install react-native-uxrate
 ```
 
-For iOS, also run `cd ios && pod install`. Android auto-links automatically.
+For iOS, also run `cd ios && pod install`.
 
-Both iOS and Android are supported out of the box.
+For Android, add the UXRate Maven repo to your `android/build.gradle`:
+
+```groovy
+allprojects {
+    repositories {
+        maven { url 'https://svug-tech.github.io/UXRateSDK' }
+    }
+}
+```
+
+Android auto-links automatically. Both platforms supported out of the box. See the [react-native-uxrate repo](https://github.com/SVUG-Tech/react-native-uxrate) for full docs.
 
 For detailed integration instructions (SwiftUI, UIKit, Android, Flutter, React Native, screen tracking, triggers, troubleshooting), see the **[Integration Guide](./INTEGRATION.md)**.
 
