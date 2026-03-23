@@ -129,6 +129,17 @@ allprojects {
 
 ---
 
+## Getting Your API Key
+
+1. Sign up or log in at [app.uxrate.com](https://app.uxrate.com/)
+2. Create a project (or select an existing one)
+3. Go to **Settings → API Keys**
+4. Copy your API key (starts with `uxr_`)
+
+Use this key in `UXRate.configure(apiKey: "uxr_...")` on any platform below.
+
+---
+
 ## Quick Start
 
 ### iOS — SwiftUI
