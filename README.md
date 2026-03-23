@@ -206,7 +206,13 @@ class MyApp : Application() {
 }
 ```
 
-> **Jetpack Compose apps** — use `SurveyScreen("Name")` composable (from `com.uxrate.sdk.ui`) on each screen. It handles lifecycle automatically, equivalent to iOS `.surveyScreen()`. Multi-Activity apps auto-detect screen names from Activity class names.
+> **Jetpack Compose + Navigation (recommended)** — one line auto-tracks all screens:
+> ```kotlin
+> val navController = rememberNavController()
+> navController.TrackScreens()  // auto-tracks all navigation destinations
+> ```
+> **Compose without Navigation** — use `SurveyScreen("Home")` per screen (hides banner on leave, like iOS `.surveyScreen()`).
+> **Multi-Activity apps** — auto-tracked from Activity class names.
 
 <details>
 <summary>Advanced configuration options</summary>
