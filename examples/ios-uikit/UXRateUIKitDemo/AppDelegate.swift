@@ -10,6 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         // Replace with your API key from the UXRate dashboard
         UXRate.configure(apiKey: "YOUR_API_KEY")
+        UXRate.identify(userId: "uikit-demo-user", properties: ["platform": "ios", "pattern": "uikit"])
         return true
     }
 

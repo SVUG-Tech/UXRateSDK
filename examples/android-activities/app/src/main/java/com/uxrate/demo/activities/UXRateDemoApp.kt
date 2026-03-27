@@ -21,5 +21,6 @@ class UXRateDemoApp : Application() {
             theme = SDKTheme.AUTO,
         )
         UXRate.loggingEnabled = true
+        UXRate.identify(userId = "activities-demo-user", properties = mapOf("platform" to "android", "pattern" to "activities"))
     }
 }

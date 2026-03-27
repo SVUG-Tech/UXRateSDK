@@ -16,9 +16,6 @@ import androidx.compose.ui.unit.dp
 
 /**
  * Profile tab — survey button should also appear here.
- *
- * Screen tracking is handled automatically by navController.TrackScreens()
- * in MainActivity — no per-screen setup needed.
  */
 @Composable
 fun ProfileScreen() {
