@@ -27,14 +27,14 @@ Or add to `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/SVUG-Tech/UXRateSDK.git", from: "0.1.0")
+    .package(url: "https://github.com/SVUG-Tech/UXRateSDK.git", from: "0.2.0")
 ]
 ```
 
 **CocoaPods** — Add to your `Podfile`:
 
 ```ruby
-pod 'UXRateSDK', '~> 0.1.0'
+pod 'UXRateSDK', '~> 0.2.0'
 ```
 
 ### Android
@@ -53,7 +53,7 @@ dependencyResolutionManagement {
 
 // build.gradle.kts (module-level)
 dependencies {
-    implementation("com.uxrate:uxrate-sdk:0.1.0")
+    implementation("com.uxrate:uxrate-sdk:0.2.0")
 }
 ```
 
@@ -68,7 +68,7 @@ No authentication required. Transitive dependencies resolve automatically.
 
 ```kotlin
 dependencies {
-    implementation(files("libs/uxrate-sdk-0.1.0.aar"))
+    implementation(files("libs/uxrate-sdk-0.2.0.aar"))
 
     // Required transitive dependencies
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
@@ -88,7 +88,7 @@ dependencies {
 ```yaml
 # pubspec.yaml
 dependencies:
-  flutter_uxrate: ^0.1.0
+  flutter_uxrate: ^0.2.0
 ```
 
 ```bash
