@@ -1,4 +1,5 @@
 import SwiftUI
+import UXRateSDK
 
 struct ProductsView: View {
     private let products = [
@@ -25,8 +26,14 @@ struct ProductsView: View {
                 }
             }
             .padding(.vertical, 4)
+            .onTapGesture {
+                UXRate.track(event: "product_viewed", properties: ["product": name])
+            }
         }
         .navigationTitle("Products")
         .surveyScreen("Products")
+        .onAppear {
+            UXRate.track(event: "screen_viewed", properties: ["screen": "Products"])
+        }
     }
 }
