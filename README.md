@@ -25,7 +25,7 @@ AI-powered in-app survey SDK for **iOS** and **Android**. Embed conversational s
 ## iOS
 
 <!-- BEGIN IOS -->
-<!-- iOS SDK v0.2.0 -->
+<!-- iOS SDK v0.2.1 -->
 
 # API Reference
 
@@ -46,7 +46,7 @@ All public API methods are static methods on the `UXRate` enum.
 | `.surveyScreen(_ name: String)` | Marks a SwiftUI view as a targetable survey screen. The name is matched against `pagePattern` regex in trigger rules. Tracks the screen once per view lifecycle. |
 
 
-<!-- iOS SDK v0.2.0 -->
+<!-- iOS SDK v0.2.1 -->
 
 # Event Tracking
 
@@ -97,7 +97,7 @@ The SDK automatically tracks these events internally. They are delivered to the 
 These events are tracked automatically and do not need to be called manually.
 
 
-<!-- iOS SDK v0.2.0 -->
+<!-- iOS SDK v0.2.1 -->
 
 # Installation
 
@@ -144,7 +144,7 @@ pod install
 3. In your target's **General > Frameworks, Libraries, and Embedded Content**, ensure UXRateSDK is set to **Embed & Sign**.
 
 
-<!-- iOS SDK v0.2.0 -->
+<!-- iOS SDK v0.2.1 -->
 
 # Quick Start
 
@@ -226,7 +226,7 @@ struct CheckoutView: View {
 The screen name is matched against the `pagePattern` regex in your survey trigger rules. When a match is found, the SDK automatically shows a banner and presents the conversational survey.
 
 
-<!-- iOS SDK v0.2.0 -->
+<!-- iOS SDK v0.2.1 -->
 
 # Session Replay Configuration
 
