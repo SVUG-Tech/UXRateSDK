@@ -34,6 +34,9 @@ struct HomeView: View {
             }
             .navigationTitle("Home")
             .surveyScreen("Home")
+            .onAppear {
+                UXRate.track(event: "screen_viewed", properties: ["screen": "Home"])
+            }
         }
     }
 }

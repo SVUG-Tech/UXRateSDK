@@ -25,6 +25,7 @@ class HomeViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UXRate.setScreen("Home")
+        UXRate.track(event: "screen_viewed", properties: ["screen": "Home"])
     }
 
     // MARK: - Table View

@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import UXRateSDK
 
 /// SwiftUI profile view embedded in UIKit via UIHostingController.
 ///
@@ -12,6 +13,11 @@ class ProfileViewController: UIHostingController<ProfileContentView> {
 
     @MainActor @preconcurrency required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) not supported")
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UXRate.track(event: "screen_viewed", properties: ["screen": "Profile"])
     }
 }
 

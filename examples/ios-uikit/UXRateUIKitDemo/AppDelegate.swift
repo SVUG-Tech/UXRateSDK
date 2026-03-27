@@ -8,7 +8,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        UXRate.configure(apiKey: "uxr_e6e454661622ad160d6261ee30160f423370fb8430463af04dea81d29ae0a606")
+        // Replace with your API key from the UXRate dashboard
+        UXRate.configure(apiKey: "YOUR_API_KEY")
+        UXRate.identify(userId: "uikit-demo-user", properties: ["platform": "ios", "pattern": "uikit"])
         return true
     }
 
