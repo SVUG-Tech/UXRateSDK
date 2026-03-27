@@ -15,7 +15,7 @@ class UXRateDemoApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // Initialize the SDK — this fetches survey config from the backend
+        // Replace with your API key from the UXRate dashboard
         UXRate.configure(
             application = this,
             apiKey = "YOUR_API_KEY"
