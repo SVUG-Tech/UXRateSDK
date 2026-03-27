@@ -270,7 +270,7 @@ Frames are stored in a circular buffer sized by `bufferSeconds` (default 30) mul
 ## Android
 
 <!-- BEGIN ANDROID -->
-<!-- Android SDK v0.2.0 -->
+<!-- Android SDK v0.2.1 -->
 
 # API Reference
 
@@ -313,7 +313,7 @@ Controls how the SDK resolves multiple surveys matching the same screen.
 | `SurveyScreen(name: String)` | Composable that sets the screen name on appear and clears it on dispose. |
 
 
-<!-- Android SDK v0.2.0 -->
+<!-- Android SDK v0.2.1 -->
 
 # Event Tracking
 
@@ -371,7 +371,7 @@ UXRate.identify(
 Properties are stored locally and evaluated against `user_segment` trigger conditions. Call `identify` again to update properties.
 
 
-<!-- Android SDK v0.2.0 -->
+<!-- Android SDK v0.2.1 -->
 
 # Installation
 
@@ -442,7 +442,7 @@ dependencies {
 With the Gradle approach transitive dependencies are resolved automatically. With the AAR download you must declare them manually.
 
 
-<!-- Android SDK v0.2.0 -->
+<!-- Android SDK v0.2.1 -->
 
 # Quick Start
 
@@ -529,7 +529,7 @@ fun HomeScreen() {
 ```
 
 
-<!-- Android SDK v0.2.0 -->
+<!-- Android SDK v0.2.1 -->
 
 # Session Replay Configuration
 
