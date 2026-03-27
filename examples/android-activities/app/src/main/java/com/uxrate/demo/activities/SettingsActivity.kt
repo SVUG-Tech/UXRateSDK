@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.uxrate.sdk.UXRate
 
 /**
  * Settings screen — auto-tracked as "Settings".
@@ -31,6 +32,7 @@ class SettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        UXRate.track("screen_viewed", mapOf("screen" to "Settings"))
         setContent {
             MaterialTheme {
                 Scaffold(

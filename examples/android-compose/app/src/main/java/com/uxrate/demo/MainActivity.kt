@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -31,14 +32,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.uxrate.sdk.UXRate
 import com.uxrate.sdk.ui.TrackScreens
 
 /**
- * Main Activity — single-Activity Compose app with bottom tab navigation.
+ * Main Activity — hosts the bottom tab navigation with Home, Profile, Settings tabs.
  *
  * Uses navController.TrackScreens() for automatic screen tracking —
- * no per-screen boilerplate needed. Route names are auto-capitalized
- * (e.g., "home" → "Home").
+ * no per-screen boilerplate needed.
  */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -122,10 +123,20 @@ private fun MainScreen() {
             startDestination = "home",
             modifier = Modifier.padding(innerPadding),
         ) {
-            composable("home") { HomeScreen(navController) }
+            composable("home") {
+                LaunchedEffect(Unit) {
+                    UXRate.track("screen_viewed", mapOf("screen" to "Home"))
+                }
+                HomeScreen(navController)
+            }
             composable("profile") { ProfileScreen() }
             composable("settings") { SettingsScreen() }
-            composable("products") { ProductsScreen() }
+            composable("products") {
+                LaunchedEffect(Unit) {
+                    UXRate.track("product_viewed", mapOf("screen" to "Products"))
+                }
+                ProductsScreen()
+            }
             composable("orders") { OrdersScreen() }
         }
     }

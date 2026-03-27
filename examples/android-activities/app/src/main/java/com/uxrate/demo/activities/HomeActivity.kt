@@ -39,6 +39,7 @@ class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        UXRate.track("screen_viewed", mapOf("screen" to "Home"))
         setContent {
             MaterialTheme {
                 Scaffold(
