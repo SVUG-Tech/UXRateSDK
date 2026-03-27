@@ -19,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Modifier
+import com.uxrate.sdk.UXRate
 
 /**
  * Orders screen — auto-tracked as "Orders".
@@ -28,6 +29,7 @@ class OrdersActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        UXRate.track("screen_viewed", mapOf("screen" to "Orders"))
         setContent {
             MaterialTheme {
                 Scaffold(

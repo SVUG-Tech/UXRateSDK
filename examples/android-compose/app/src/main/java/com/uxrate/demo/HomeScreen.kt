@@ -30,8 +30,9 @@ import com.uxrate.sdk.UXRate
 /**
  * Home tab — survey button should appear here.
  *
- * Screen tracking is handled automatically by navController.TrackScreens()
- * in MainActivity — no per-screen setup needed.
+ * Key integration points:
+ * - UXRate.setScreen("Home") called via LaunchedEffect to report this screen name.
+ * - UXRate.track() called when a notable action occurs (Products tapped).
  */
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -44,6 +45,7 @@ fun HomeScreen(navController: NavController) {
                 icon = Icons.Outlined.ShoppingBag,
                 label = "Products",
                 onClick = {
+                    // Track the event — can be used in event-based trigger rules.
                     UXRate.track(event = "products_tapped")
                     navController.navigate("products")
                 }

@@ -20,6 +20,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.uxrate.sdk.UXRate
 
 /**
  * Profile screen — auto-tracked as "Profile" (stripped from "ProfileActivity").
@@ -31,6 +32,7 @@ class ProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        UXRate.track("screen_viewed", mapOf("screen" to "Profile"))
         setContent {
             MaterialTheme {
                 Scaffold(

@@ -1,83 +1,79 @@
-/**
- * react-native-uxrate Example App
- *
- * Demonstrates the minimal UXRate integration in a React Native app:
- *   1. Call UXRate.configure() once at app startup (useEffect with empty deps).
- *   2. Call UXRate.identify() after the user is known.
- *   3. Call UXRate.setScreen() on every screen via useFocusEffect.
- */
-
 import React, { useEffect } from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import { UXRate } from 'react-native-uxrate';
 
-import HomeScreen from './src/HomeScreen';
-import ProfileScreen from './src/ProfileScreen';
-import SettingsScreen from './src/SettingsScreen';
-import ProductsScreen from './src/ProductsScreen';
-import OrdersScreen from './src/OrdersScreen';
+const Stack = createNativeStackNavigator();
 
-// ─── Navigator Types ──────────────────────────────────────────────────────────
-
-export type HomeStackParamList = {
-  Home: undefined;
-  Products: undefined;
-  Orders: undefined;
-};
-
-const Tab = createBottomTabNavigator();
-const HomeStack = createNativeStackNavigator<HomeStackParamList>();
-
-// ─── Home Stack ───────────────────────────────────────────────────────────────
-
-function HomeStackNavigator() {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="Products" component={ProductsScreen} />
-      <HomeStack.Screen name="Orders" component={OrdersScreen} />
-    </HomeStack.Navigator>
-  );
-}
-
-// ─── Root App ─────────────────────────────────────────────────────────────────
-
-export default function App() {
+// ------------------------------------------------------------------
+// Configure the UXRate SDK at app startup.
+// Replace YOUR_API_KEY with your real key from the UXRate dashboard.
+// For the dev environment use: https://app-dev.uxrate.com
+// ------------------------------------------------------------------
+function App(): React.JSX.Element {
   useEffect(() => {
-    UXRate.configure({ apiKey: 'YOUR_API_KEY' });
+    UXRate.configure({
+      apiKey: 'YOUR_API_KEY',
+      useMockService: true, // set false in production
+    });
 
-    // Identify a demo user — properties can be used in user_segment rules.
     UXRate.identify({
-      userId: 'rn-user-1',
-      properties: { platform: 'react-native', plan: 'pro' },
+      userId: 'demo-user-1',
+      properties: { plan: 'trial' },
     });
   }, []);
 
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={{ headerShown: false }}
-        >
-          <Tab.Screen
-            name="HomeTab"
-            component={HomeStackNavigator}
-            options={{ title: 'Home' }}
-          />
-          <Tab.Screen
-            name="Profile"
-            component={ProfileScreen}
-          />
-          <Tab.Screen
-            name="Settings"
-            component={SettingsScreen}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <NavigationContainer
+      onStateChange={(state) => {
+        const route = state?.routes[state.index];
+        if (route) {
+          UXRate.setScreen(route.name);
+        }
+      }}
+    >
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Products" component={ProductsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
+
+function HomeScreen({ navigation }: any): React.JSX.Element {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Home Screen</Text>
+      <Button
+        title="Go to Products"
+        onPress={() => navigation.navigate('Products')}
+      />
+      <View style={styles.spacer} />
+      <Button
+        title="Track Button Tap"
+        onPress={() => UXRate.track({ event: 'button_tapped' })}
+      />
+    </View>
+  );
+}
+
+function ProductsScreen(): React.JSX.Element {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Products Screen</Text>
+      <Button
+        title="Track Button Tap"
+        onPress={() => UXRate.track({ event: 'button_tapped' })}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  title: { fontSize: 24, marginBottom: 20 },
+  spacer: { height: 12 },
+});
+
+export default App;

@@ -109,7 +109,7 @@
 			mainGroup = B1C2D3E4F5A60060;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				B1C2D3E4F5A600E0 /* XCLocalSwiftPackageReference "../../../UXRateSDK-iOS/UXRateSDK" */,
+				B1C2D3E4F5A600E0 /* XCRemoteSwiftPackageReference "https://github.com/SVUG-Tech/UXRateSDK.git" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B1C2D3E4F5A60070 /* Products */;
@@ -335,16 +335,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		B1C2D3E4F5A600E0 /* XCLocalSwiftPackageReference "../../../UXRateSDK-iOS/UXRateSDK" */ = {
+		B1C2D3E4F5A600E0 /* XCRemoteSwiftPackageReference "https://github.com/SVUG-Tech/UXRateSDK.git" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../../UXRateSDK-iOS/UXRateSDK";
+			relativePath = "../../UXRateSDK";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		B1C2D3E4F5A60011 /* UXRateSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B1C2D3E4F5A600E0 /* XCLocalSwiftPackageReference "../../../UXRateSDK-iOS/UXRateSDK" */;
+			package = B1C2D3E4F5A600E0 /* XCRemoteSwiftPackageReference "https://github.com/SVUG-Tech/UXRateSDK.git" */;
 			productName = UXRateSDK;
 		};
 /* End XCSwiftPackageProductDependency section */

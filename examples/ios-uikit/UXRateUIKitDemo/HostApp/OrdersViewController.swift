@@ -1,4 +1,5 @@
 import UIKit
+import UXRateSDK
 
 /// Pure UIKit orders screen — auto-tracked as "OrdersViewController" by the SDK swizzle.
 class OrdersViewController: UITableViewController {
@@ -44,5 +45,10 @@ class OrdersViewController: UITableViewController {
         cell.accessoryView = badge
 
         return cell
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UXRate.track(event: "screen_viewed", properties: ["screen": "Orders"])
     }
 }
