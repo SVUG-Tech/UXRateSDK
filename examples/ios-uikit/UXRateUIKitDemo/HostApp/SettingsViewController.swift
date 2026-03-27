@@ -1,4 +1,5 @@
 import UIKit
+import UXRateSDK
 
 /// Pure UIKit settings screen — auto-tracked as "SettingsViewController" by the SDK swizzle.
 class SettingsViewController: UIViewController {
@@ -40,5 +41,10 @@ class SettingsViewController: UIViewController {
             stack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             stack.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 32),
         ])
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UXRate.track(event: "screen_viewed", properties: ["screen": "Settings"])
     }
 }

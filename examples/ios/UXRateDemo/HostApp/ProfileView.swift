@@ -15,6 +15,9 @@ struct ProfileView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle("Profile")
+            .onAppear {
+                UXRate.track(event: "screen_viewed", properties: ["screen": "Profile"])
+            }
         }
     }
 }

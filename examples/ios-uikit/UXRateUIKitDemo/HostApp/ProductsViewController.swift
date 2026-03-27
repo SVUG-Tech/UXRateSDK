@@ -22,6 +22,7 @@ class ProductsViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UXRate.setScreen("Products")
+        UXRate.track(event: "screen_viewed", properties: ["screen": "Products"])
     }
 
     // MARK: - Table View
@@ -42,5 +43,11 @@ class ProductsViewController: UITableViewController {
         cell.contentConfiguration = config
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let product = products[indexPath.row]
+        UXRate.track(event: "product_viewed", properties: ["product_name": product.0, "product_price": product.2])
     }
 }
