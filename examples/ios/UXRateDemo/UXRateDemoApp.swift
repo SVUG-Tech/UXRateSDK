@@ -11,7 +11,20 @@ import UXRateSDK
 @main
 struct UXRateDemoApp: App {
     init() {
-        UXRate.configure(apiKey: "uxr_e6e454661622ad160d6261ee30160f423370fb8430463af04dea81d29ae0a606")
+        // Replace with your API key from the UXRate dashboard
+        UXRate.configure(
+            apiKey: "YOUR_API_KEY",
+            overlapStrategy: .showLast
+        )
+
+        // Use a unique ID per install so completed interviews don't block retesting
+        let demoUserId = "ios-demo-\(UUID().uuidString.prefix(8).lowercased())"
+        UXRate.identify(
+            userId: demoUserId,
+            properties: ["platform": "ios", "plan": "pro"]
+        )
+
+        UXRate.loggingEnabled = true
     }
 
     var body: some Scene {

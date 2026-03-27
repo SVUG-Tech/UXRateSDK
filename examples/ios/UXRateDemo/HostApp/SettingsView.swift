@@ -1,4 +1,5 @@
 import SwiftUI
+import UXRateSDK
 
 struct SettingsView: View {
     var body: some View {
@@ -14,6 +15,9 @@ struct SettingsView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle("Settings")
+            .onAppear {
+                UXRate.track(event: "screen_viewed", properties: ["screen": "Settings"])
+            }
         }
     }
 }
