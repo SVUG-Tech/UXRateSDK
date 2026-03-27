@@ -1,4 +1,4 @@
-name: Rebuild README
+name: Sync Docs
 
 on:
   push:
@@ -6,9 +6,10 @@ on:
     paths:
       - 'docs/**'
       - 'scripts/rebuild-readme.sh'
+      - 'scripts/sync-wiki.sh'
 
 jobs:
-  rebuild:
+  rebuild-readme:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -26,3 +27,17 @@ jobs:
           git add README.md
           git commit -m "docs: rebuild README from docs/"
           git push
+
+  sync-wiki:
+    needs: rebuild-readme
+    runs-on: ubuntu-latest
+    concurrency:
+      group: wiki-sync
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync docs to wiki
+        env:
+          WIKI_TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
+        run: bash scripts/sync-wiki.sh
