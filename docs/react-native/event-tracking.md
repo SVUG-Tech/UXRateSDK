@@ -1,24 +1,19 @@
-# Event Tracking
+# Event Tracking — React Native
 
-## Custom events
+> For concepts and best practices, see [Event Tracking](Event-Tracking).
 
-Use `UXRate.track` to record events that can trigger surveys:
+## Custom Events
 
 ```tsx
 UXRate.track({ event: 'purchase_complete' });
 UXRate.track({ event: 'onboarding_finished' });
 ```
 
-Event names are arbitrary strings. Define matching trigger rules in the UXRate
-dashboard to show a survey when a specific event fires.
+## Screen Tracking
 
-## Screen tracking
+React Native runs inside a single native view, so auto-track sees only one screen. Report screens manually.
 
-React Native apps run inside a single native ViewController (iOS) or Activity
-(Android), so the native auto-track feature sees only one screen. You should
-report screens manually using `setScreen`.
-
-### Per-screen tracking with `useFocusEffect`
+### Per-screen with `useFocusEffect`
 
 ```tsx
 import { useFocusEffect } from '@react-navigation/native';
@@ -33,13 +28,9 @@ function SettingsScreen() {
 }
 ```
 
-### Global tracking with React Navigation
-
-You can report every navigation change from a single place:
+### Global with React Navigation
 
 ```tsx
-import { NavigationContainer } from '@react-navigation/native';
-
 <NavigationContainer
   onStateChange={(state) => {
     const route = state?.routes[state.index];
@@ -49,12 +40,3 @@ import { NavigationContainer } from '@react-navigation/native';
   {/* screens */}
 </NavigationContainer>
 ```
-
-See the [React Navigation integration tutorial](../tutorials/react-navigation-integration.md) for a full walkthrough.
-
-## Best practices
-
-- Keep event names short and consistent (e.g. `snake_case`).
-- Report screens as early as possible so survey targeting is accurate.
-- Avoid tracking high-frequency events (e.g. scroll positions) -- they add
-  noise without improving targeting.
