@@ -13,7 +13,7 @@ struct UXRateDemoApp: App {
     init() {
         // Replace with your API key from the UXRate dashboard
         UXRate.configure(
-            apiKey: "YOUR_API_KEY",
+            apiKey: "uxr_3ffb5519058e749e5a93d227fca304a073cf2a4fb5d71ab29897d0492899e9a3",
             overlapStrategy: .showLast
         )
 
