@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.2.2 -->
+<!-- iOS SDK v0.3.0 -->
 
 # SwiftUI Integration Tutorial
 

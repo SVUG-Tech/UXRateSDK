@@ -11,17 +11,12 @@ import UXRateSDK
 @main
 struct UXRateDemoApp: App {
     init() {
-        // Replace with your API key from the UXRate dashboard
+        // Mock environment — works immediately without dashboard setup.
+        // Switch to .production with your real API key for live surveys.
         UXRate.configure(
-            apiKey: "uxr_3ffb5519058e749e5a93d227fca304a073cf2a4fb5d71ab29897d0492899e9a3",
+            apiKey: "YOUR_API_KEY",
+            environment: .mock,
             overlapStrategy: .showLast
-        )
-
-        // Use a unique ID per install so completed interviews don't block retesting
-        let demoUserId = "ios-demo-\(UUID().uuidString.prefix(8).lowercased())"
-        UXRate.identify(
-            userId: demoUserId,
-            properties: ["platform": "ios", "plan": "pro"]
         )
 
         UXRate.loggingEnabled = true

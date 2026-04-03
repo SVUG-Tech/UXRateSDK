@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.2.2 -->
+<!-- iOS SDK v0.3.0 -->
 
 # Quick Start
 
@@ -7,6 +7,18 @@ Get UXRateSDK running in your iOS app in four steps.
 ## Step 1: Configure the SDK
 
 Call `UXRate.configure` as early as possible in your app lifecycle.
+
+**Quick test with mock surveys (no backend needed):**
+
+```swift
+UXRate.configure(apiKey: "YOUR_API_KEY", environment: .mock)
+```
+
+**Production:**
+
+```swift
+UXRate.configure(apiKey: "uxr_your_api_key")
+```
 
 **SwiftUI:**
 

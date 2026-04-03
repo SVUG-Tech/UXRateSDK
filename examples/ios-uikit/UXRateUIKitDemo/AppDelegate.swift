@@ -8,9 +8,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        // Replace with your API key from the UXRate dashboard
-        UXRate.configure(apiKey: "YOUR_API_KEY")
-        UXRate.identify(userId: "uikit-demo-user", properties: ["platform": "ios", "pattern": "uikit"])
+        // Mock environment — works immediately without dashboard setup.
+        UXRate.configure(apiKey: "YOUR_API_KEY", environment: .mock)
         return true
     }
 
