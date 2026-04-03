@@ -13,14 +13,11 @@ const Stack = createNativeStackNavigator();
 // ------------------------------------------------------------------
 function App(): React.JSX.Element {
   useEffect(() => {
+    // Mock environment — works immediately without dashboard setup.
+    // Switch to 'production' with your real API key for live surveys.
     UXRate.configure({
       apiKey: 'YOUR_API_KEY',
-      useMockService: true, // set false in production
-    });
-
-    UXRate.identify({
-      userId: 'demo-user-1',
-      properties: { plan: 'trial' },
+      environment: 'mock',
     });
   }, []);
 

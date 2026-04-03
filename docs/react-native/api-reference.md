@@ -24,16 +24,18 @@ All methods return `Promise<void>`.
 ```ts
 interface ConfigureOptions {
   apiKey: string;
-  autoTrackScreens?: boolean; // default: false
-  useMockService?: boolean;   // default: false
+  environment?: 'production' | 'development' | 'local' | 'mock';
+  autoTrackScreens?: boolean;
+  mockScreens?: string[];
 }
 ```
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `apiKey` | `string` | Yes | Your UXRate API key. |
+| `environment` | `string` | No | Backend environment: `'production'` (default), `'development'`, `'local'`, or `'mock'`. |
 | `autoTrackScreens` | `boolean` | No | Enable native auto screen tracking. In React Native apps manual `setScreen` calls are preferred. |
-| `useMockService` | `boolean` | No | Use the built-in mock backend for local testing. |
+| `mockScreens` | `string[]` | No | Screen names for mock survey targeting. Only used when environment is `'mock'`. |
 
 ---
 
