@@ -1,4 +1,4 @@
-<!-- Android SDK v0.2.1 -->
+<!-- Android SDK v0.3.0 -->
 
 # Event Tracking — Android
 

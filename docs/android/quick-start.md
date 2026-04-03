@@ -1,4 +1,4 @@
-<!-- Android SDK v0.2.1 -->
+<!-- Android SDK v0.3.0 -->
 
 # Quick Start
 
@@ -11,6 +11,14 @@ Create (or update) your `Application` subclass and register it in `AndroidManife
 ```xml
 <application android:name=".MyApp" ... >
 ```
+
+**Quick test with mock surveys (no backend needed):**
+
+```kotlin
+UXRate.configure(application = this, apiKey = "YOUR_API_KEY", environment = Environment.MOCK)
+```
+
+**Production:**
 
 ```kotlin
 import android.app.Application

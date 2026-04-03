@@ -1,4 +1,4 @@
-<!-- Android SDK v0.2.1 -->
+<!-- Android SDK v0.3.0 -->
 
 # API Reference
 
@@ -6,7 +6,7 @@
 
 | Method | Signature | Description |
 |--------|-----------|-------------|
-| `configure` | `configure(application: Application, apiKey: String, baseURL: String = "https://app.uxrate.com", autoTrackScreens: Boolean = true, useMockService: Boolean = false, overlapStrategy: OverlapStrategy = SHOW_FIRST, theme: SDKTheme = AUTO)` | Initializes the SDK. Call once in `Application.onCreate()`. Fetches survey configuration from the backend asynchronously. |
+| `configure` | `configure(application: Application, apiKey: String, environment: Environment = PRODUCTION, autoTrackScreens: Boolean = true, mockScreens: List<String>? = null, overlapStrategy: OverlapStrategy = SHOW_FIRST, theme: SDKTheme = AUTO)` | Initializes the SDK. Call once in `Application.onCreate()`. `environment` sets the backend: `PRODUCTION`, `DEVELOPMENT`, `LOCAL`, or `MOCK`. `mockScreens` lets you specify which screens trigger mock surveys. |
 | `identify` | `identify(userId: String, properties: Map<String, String> = emptyMap())` | Sets the current user ID and properties for segment-based targeting. |
 | `track` | `track(event: String, properties: Map<String, String> = emptyMap())` | Tracks a custom event. Re-evaluates trigger rules and enqueues the event for backend submission. |
 | `setScreen` | `setScreen(name: String)` | Manually sets the current screen name. Overrides auto-tracking for the current screen. Triggers survey evaluation. |

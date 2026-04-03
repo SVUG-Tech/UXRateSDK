@@ -2,6 +2,7 @@ package com.uxrate.demo.activities
 
 import android.app.Application
 import com.uxrate.sdk.UXRate
+import com.uxrate.sdk.models.Environment
 import com.uxrate.sdk.models.SDKTheme
 
 /**
@@ -14,13 +15,13 @@ import com.uxrate.sdk.models.SDKTheme
 class UXRateDemoApp : Application() {
     override fun onCreate() {
         super.onCreate()
+        // Mock environment — works immediately without dashboard setup.
         UXRate.configure(
             application = this,
             apiKey = "YOUR_API_KEY",
-            autoTrackScreens = true,  // auto-detects Activity names
-            theme = SDKTheme.AUTO,
+            environment = Environment.MOCK,
+            autoTrackScreens = true,
         )
         UXRate.loggingEnabled = true
-        UXRate.identify(userId = "activities-demo-user", properties = mapOf("platform" to "android", "pattern" to "activities"))
     }
 }
