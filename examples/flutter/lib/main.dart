@@ -4,20 +4,11 @@ import 'package:flutter_uxrate/flutter_uxrate.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Configure the UXRate SDK.
-  // Replace YOUR_API_KEY with your real API key from the UXRate dashboard.
-  // For dev environment, point the native SDK base URL to:
-  //   https://app-dev.uxrate.com
+  // Mock environment — works immediately without dashboard setup.
+  // Switch to 'production' with your real API key for live surveys.
   await UXRate.configure(
     apiKey: 'YOUR_API_KEY',
-    autoTrackScreens: false,
-    useMockService: false,
-  );
-
-  // Identify the current user (optional but recommended).
-  await UXRate.identify(
-    userId: 'demo-user-001',
-    properties: {'plan': 'free', 'source': 'example_app'},
+    environment: 'mock',
   );
 
   runApp(const ExampleApp());

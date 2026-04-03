@@ -6,13 +6,21 @@ Get UXRate running in your Flutter app in four steps.
 
 Call `UXRate.configure` once at app startup, **before** `runApp()`:
 
+**Quick test with mock surveys (no backend needed):**
+
+```dart
+await UXRate.configure(apiKey: 'YOUR_API_KEY', environment: 'mock');
+```
+
+**Production:**
+
 ```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_uxrate/flutter_uxrate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await UXRate.configure(apiKey: 'YOUR_API_KEY');
+  await UXRate.configure(apiKey: 'uxr_your_api_key');
   runApp(const MyApp());
 }
 ```

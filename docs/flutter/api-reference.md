@@ -22,8 +22,9 @@ import 'package:flutter_uxrate/flutter_uxrate.dart';
 ```dart
 static Future<void> configure({
   required String apiKey,
+  String environment = 'production',
   bool autoTrackScreens = false,
-  bool useMockService = false,
+  List<String>? mockScreens,
 })
 ```
 
@@ -32,8 +33,9 @@ static Future<void> configure({
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `apiKey` | `String` | *required* | Your UXRate API key. |
+| `environment` | `String` | `'production'` | Backend environment: `'production'`, `'development'`, `'local'`, or `'mock'`. |
 | `autoTrackScreens` | `bool` | `false` | Auto-detect screen changes via native swizzle. Usually `false` for Flutter because the app runs in a single native view. |
-| `useMockService` | `bool` | `false` | Use the built-in mock backend for testing. |
+| `mockScreens` | `List<String>?` | `null` | Screen names for mock survey targeting. Only used when environment is `'mock'`. |
 
 ---
 
