@@ -1,4 +1,4 @@
-<!-- Android SDK v0.3.0 -->
+<!-- Android SDK v0.3.1 -->
 
 # Quick Start
 
