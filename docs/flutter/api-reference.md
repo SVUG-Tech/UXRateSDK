@@ -14,6 +14,7 @@ import 'package:flutter_uxrate/flutter_uxrate.dart';
 | [`identify`](#identify) | Associate the current session with a user. |
 | [`track`](#track) | Record a custom event. |
 | [`setScreen`](#setscreen) | Report the current screen name. |
+| [`setLoggingEnabled`](#setloggingenabled) | Enable or disable native SDK debug logging. |
 
 ---
 
@@ -82,3 +83,19 @@ static Future<void> setScreen(String name)
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `name` | `String` | *required* | Name of the current screen. |
+
+---
+
+### setLoggingEnabled
+
+```dart
+static Future<void> setLoggingEnabled(bool enabled)
+```
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `enabled` | `bool` | *required* | `true` to enable debug logging to Logcat (Android) / Xcode console (iOS), `false` to disable. Defaults to `false`. |
+
+Call before `configure()` to capture initialization logs.
