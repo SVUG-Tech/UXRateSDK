@@ -1,4 +1,4 @@
-<!-- Android SDK v0.3.1 -->
+<!-- Android SDK v0.3.2 -->
 
 # API Reference
 
@@ -11,6 +11,8 @@
 | `track` | `track(event: String, properties: Map<String, String> = emptyMap())` | Tracks a custom event. Re-evaluates trigger rules and enqueues the event for backend submission. |
 | `setScreen` | `setScreen(name: String)` | Manually sets the current screen name. Overrides auto-tracking for the current screen. Triggers survey evaluation. |
 | `loggingEnabled` | `var loggingEnabled: Boolean` | Enables or disables debug logging to Logcat. Defaults to `false`. |
+| `onBannerWillShow` | `var onBannerWillShow: ((studyId: String, screenName: String, completion: (Boolean) -> Unit) -> Unit)?` | Called before a banner is shown. Call `completion(true)` to allow, `completion(false)` to suppress. 2-second safety timeout defaults to show. |
+| `hideBanner` | `fun hideBanner()` | Programmatically hides the visible banner without tracking a dismiss event. |
 
 ## Enums
 

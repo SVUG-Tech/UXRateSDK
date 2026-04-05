@@ -1,4 +1,4 @@
-<!-- Android SDK v0.3.1 -->
+<!-- Android SDK v0.3.2 -->
 
 # Activity-Based App Integration
 
