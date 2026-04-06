@@ -9,7 +9,6 @@ const Stack = createNativeStackNavigator();
 // ------------------------------------------------------------------
 // Configure the UXRate SDK at app startup.
 // Replace YOUR_API_KEY with your real key from the UXRate dashboard.
-// For the dev environment use: https://app-dev.uxrate.com
 // ------------------------------------------------------------------
 function App(): React.JSX.Element {
   useEffect(() => {
