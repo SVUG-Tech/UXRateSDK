@@ -14,6 +14,9 @@ import 'package:flutter_uxrate/flutter_uxrate.dart';
 | [`identify`](#identify) | Associate the current session with a user. |
 | [`track`](#track) | Record a custom event. |
 | [`setScreen`](#setscreen) | Report the current screen name. |
+| [`setLoggingEnabled`](#setloggingenabled) | Enable or disable native SDK debug logging. |
+| [`onBannerWillShow`](#onbannerwillshow) | Register a callback before a banner is shown. |
+| [`hideBanner`](#hidebanner) | Programmatically hide the visible banner. |
 
 ---
 
@@ -82,3 +85,46 @@ static Future<void> setScreen(String name)
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
 | `name` | `String` | *required* | Name of the current screen. |
+
+---
+
+### setLoggingEnabled
+
+```dart
+static Future<void> setLoggingEnabled(bool enabled)
+```
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|------|------|---------|-------------|
+| `enabled` | `bool` | *required* | `true` to enable debug logging to Logcat (Android) / Xcode console (iOS), `false` to disable. Defaults to `false`. |
+
+Call before `configure()` to capture initialization logs.
+
+---
+
+### onBannerWillShow
+
+```dart
+static void onBannerWillShow(BannerWillShowCallback callback)
+```
+
+Register a callback that fires before a survey banner is shown. Call `completion(true)` to allow the banner or `completion(false)` to suppress it. A 2-second safety timeout applies — if completion is never called, the banner shows by default.
+
+```dart
+UXRate.onBannerWillShow((studyId, screenName, completion) {
+  final shouldShow = screenName != 'CheckoutScreen';
+  completion(shouldShow);
+});
+```
+
+---
+
+### hideBanner
+
+```dart
+static Future<void> hideBanner()
+```
+
+Programmatically hides the currently visible survey banner. Does not track a dismiss event — use for app-driven cleanup rather than user-initiated dismissal.
