@@ -38,7 +38,7 @@ android {
 
 dependencies {
     // UXRate SDK — use local module when developing, Maven when standalone
-    implementation("com.uxrate:uxrate-sdk:0.3.2")
+    implementation("com.uxrate:uxrate-sdk:0.5.0")
 
     // Compose
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
