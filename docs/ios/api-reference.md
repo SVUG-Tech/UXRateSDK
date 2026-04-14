@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.3.0 -->
+<!-- iOS SDK v0.5.0 -->
 
 # API Reference
 
@@ -11,6 +11,8 @@ All public API methods are static methods on the `UXRate` enum.
 | `track` | `track(event:properties:)` | Tracks a custom event by name. Increments the local event count (used by `event` trigger rules) and enqueues the event for batch delivery. |
 | `setScreen` | `setScreen(_:)` | Manually sets the current screen name. Overrides the auto-detected UIViewController class name. Required for SwiftUI screens when not using `.surveyScreen()`. |
 | `loggingEnabled` | `loggingEnabled: Bool` | Static property that controls debug console output. Defaults to `true` in DEBUG builds, `false` in release. Set before calling `configure` to silence all SDK logs. |
+| `onBannerWillShow` | `onBannerWillShow: ((_ studyId: String, _ screenName: String, _ completion: @escaping (Bool) -> Void) -> Void)?` | Called before a banner is shown. Call `completion(true)` to allow, `completion(false)` to suppress. 2-second safety timeout defaults to show. |
+| `hideBanner` | `hideBanner()` | Programmatically hides the visible banner without tracking a dismiss event. |
 
 ## View Modifiers
 
