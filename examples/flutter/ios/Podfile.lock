@@ -1,0 +1,29 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_uxrate (0.5.1):
+    - Flutter
+    - UXRateSDK (< 0.6.0, >= 0.5.0)
+  - UXRateSDK (0.5.0)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_uxrate (from `.symlinks/plugins/flutter_uxrate/ios`)
+
+SPEC REPOS:
+  trunk:
+    - UXRateSDK
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_uxrate:
+    :path: ".symlinks/plugins/flutter_uxrate/ios"
+
+SPEC CHECKSUMS:
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_uxrate: 8fceafd7ff09e26779696c5d60b6377879324a25
+  UXRateSDK: 3870a61aaf91bfd828acc4e08c8422e2be4ec388
+
+PODFILE CHECKSUM: 04d97c35eee2f58be76ac97bfe2f9622f66611af
+
+COCOAPODS: 1.16.2
