@@ -1,4 +1,4 @@
-<!-- Android SDK v0.5.0 -->
+<!-- Android SDK v0.6.0 -->
 
 # Installation
 
