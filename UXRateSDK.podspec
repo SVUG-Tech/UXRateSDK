@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name             = 'UXRateSDK'
-  s.version          = '0.6.0'
+  s.version          = '0.7.0'
   s.summary          = 'AI-powered in-app survey SDK for iOS'
   s.homepage         = 'https://github.com/SVUG-Tech/UXRateSDK'
   s.license          = { :type => 'Proprietary', :text => 'Copyright UXRate. All rights reserved.' }
   s.author           = { 'UXRate' => 'sdk@uxrate.app' }
 
   s.source           = {
-    :http => 'https://github.com/SVUG-Tech/UXRateSDK/releases/download/ios-0.6.0/UXRateSDK.xcframework.zip'
+    :http => 'https://github.com/SVUG-Tech/UXRateSDK/releases/download/ios-0.7.0/UXRateSDK.xcframework.zip'
   }
 
   s.ios.deployment_target = '17.0'

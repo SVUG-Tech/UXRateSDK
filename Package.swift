@@ -10,8 +10,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "UXRateSDK",
-            url: "https://github.com/SVUG-Tech/UXRateSDK/releases/download/ios-0.6.0/UXRateSDK.xcframework.zip",
-            checksum: "1769b22f4ba061d4b2b6d37d5176d30a62e0f8e22301c131fb2a9cbbf8693a17"
+            url: "https://github.com/SVUG-Tech/UXRateSDK/releases/download/ios-0.7.0/UXRateSDK.xcframework.zip",
+            checksum: "4ff007afcc455834bead79b50eb88a2ea12183a41867465a413f3a4ae5789ec0"
         ),
     ]
 )
