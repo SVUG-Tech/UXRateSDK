@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.7.0 -->
+<!-- iOS SDK v0.8.0 -->
 
 # Quick Start
 
@@ -16,12 +16,18 @@ UXRate.configure(apiKey: "mock")
 
 **Production / development / local:**
 
-The SDK auto-resolves the backend from the API key prefix
-(`uxr_…` → production, `uxr_dev_…` → dev, `uxr_loc_…` → local):
-
 ```swift
 UXRate.configure(apiKey: "uxr_your_api_key")
 ```
+
+The SDK auto-resolves the backend from the API key prefix:
+
+| Prefix | Backend |
+| --- | --- |
+| `uxr_…` | Production (`https://app.uxrate.com`) |
+| `uxr_dev_…` | Development (`https://app-dev.uxrate.com`) |
+| `uxr_loc_…` | Local (`http://localhost:3000`) |
+| `mock` | In-memory mock service (no network) |
 
 **SwiftUI:**
 
