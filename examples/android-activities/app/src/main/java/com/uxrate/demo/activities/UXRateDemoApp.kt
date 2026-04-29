@@ -2,8 +2,6 @@ package com.uxrate.demo.activities
 
 import android.app.Application
 import com.uxrate.sdk.UXRate
-import com.uxrate.sdk.models.Environment
-import com.uxrate.sdk.models.SDKTheme
 
 /**
  * Application class — configures the UXRate SDK.
@@ -15,11 +13,10 @@ import com.uxrate.sdk.models.SDKTheme
 class UXRateDemoApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        // Mock environment — works immediately without dashboard setup.
+        // Mock service — works immediately without dashboard setup.
         UXRate.configure(
             application = this,
-            apiKey = "YOUR_API_KEY",
-            environment = Environment.MOCK,
+            apiKey = "mock",
             autoTrackScreens = true,
         )
         UXRate.loggingEnabled = true

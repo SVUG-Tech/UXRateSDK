@@ -9,10 +9,14 @@ Call `UXRate.configure` once at app startup, **before** `runApp()`:
 **Quick test with mock surveys (no backend needed):**
 
 ```dart
-await UXRate.configure(apiKey: 'YOUR_API_KEY', environment: 'mock');
+await UXRate.configure(apiKey: 'mock');
 ```
 
-**Production:**
+**Production / development / local:**
+
+The SDK auto-resolves the backend from the API key prefix
+(`uxr_…` → production, `uxr_dev_…` → dev, `uxr_loc_…` → local):
+
 
 ```dart
 import 'package:flutter/material.dart';

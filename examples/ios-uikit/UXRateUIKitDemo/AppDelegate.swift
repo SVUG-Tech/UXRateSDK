@@ -8,8 +8,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        // Mock environment — works immediately without dashboard setup.
-        UXRate.configure(apiKey: "YOUR_API_KEY", environment: .mock)
+        // Mock service — works immediately without dashboard setup.
+        // Replace with your real API key (uxr_…) for live surveys.
+        UXRate.configure(apiKey: "mock")
         return true
     }
 

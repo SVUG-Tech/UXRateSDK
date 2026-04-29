@@ -15,10 +15,14 @@ Create (or update) your `Application` subclass and register it in `AndroidManife
 **Quick test with mock surveys (no backend needed):**
 
 ```kotlin
-UXRate.configure(application = this, apiKey = "YOUR_API_KEY", environment = Environment.MOCK)
+UXRate.configure(application = this, apiKey = "mock")
 ```
 
-**Production:**
+**Production / development / local:**
+
+The SDK auto-resolves the backend from the API key prefix
+(`uxr_…` → production, `uxr_dev_…` → dev, `uxr_loc_…` → local):
+
 
 ```kotlin
 import android.app.Application

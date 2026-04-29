@@ -11,10 +11,13 @@ Call `UXRate.configure` as early as possible in your app lifecycle.
 **Quick test with mock surveys (no backend needed):**
 
 ```swift
-UXRate.configure(apiKey: "YOUR_API_KEY", environment: .mock)
+UXRate.configure(apiKey: "mock")
 ```
 
-**Production:**
+**Production / development / local:**
+
+The SDK auto-resolves the backend from the API key prefix
+(`uxr_…` → production, `uxr_dev_…` → dev, `uxr_loc_…` → local):
 
 ```swift
 UXRate.configure(apiKey: "uxr_your_api_key")

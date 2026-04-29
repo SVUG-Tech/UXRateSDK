@@ -9,10 +9,14 @@ Call `configure` once at app startup, typically in your root `App.tsx`:
 **Quick test with mock surveys (no backend needed):**
 
 ```tsx
-UXRate.configure({ apiKey: 'YOUR_API_KEY', environment: 'mock' });
+UXRate.configure({ apiKey: 'mock' });
 ```
 
-**Production:**
+**Production / development / local:**
+
+The SDK auto-resolves the backend from the API key prefix
+(`uxr_…` → production, `uxr_dev_…` → dev, `uxr_loc_…` → local):
+
 
 ```tsx
 import { UXRate } from 'react-native-uxrate';

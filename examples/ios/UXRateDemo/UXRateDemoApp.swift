@@ -11,11 +11,11 @@ import UXRateSDK
 @main
 struct UXRateDemoApp: App {
     init() {
-        // Mock environment — works immediately without dashboard setup.
-        // Switch to .production with your real API key for live surveys.
+        // Mock service — works immediately without dashboard setup.
+        // Replace `apiKey: "mock"` with your real API key (uxr_…) for live surveys;
+        // the SDK auto-resolves the backend from the key prefix.
         UXRate.configure(
-            apiKey: "YOUR_API_KEY",
-            environment: .mock,
+            apiKey: "mock",
             overlapStrategy: .showLast
         )
 
