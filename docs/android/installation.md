@@ -1,4 +1,4 @@
-<!-- Android SDK v0.7.0 -->
+<!-- Android SDK v0.8.0 -->
 
 # Installation
 
