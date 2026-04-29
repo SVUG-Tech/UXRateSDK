@@ -14,10 +14,6 @@ await UXRate.configure(apiKey: 'mock');
 
 **Production / development / local:**
 
-The SDK auto-resolves the backend from the API key prefix
-(`uxr_…` → production, `uxr_dev_…` → dev, `uxr_loc_…` → local):
-
-
 ```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_uxrate/flutter_uxrate.dart';
@@ -28,6 +24,15 @@ void main() async {
   runApp(const MyApp());
 }
 ```
+
+The SDK auto-resolves the backend from the key prefix:
+
+| Prefix | Backend |
+| --- | --- |
+| `uxr_…` | Production |
+| `uxr_dev_…` | Development |
+| `uxr_loc_…` | Local |
+| `mock` | In-memory mock service |
 
 ## 2. Identify the user
 
