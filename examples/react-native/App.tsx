@@ -8,14 +8,13 @@ const Stack = createNativeStackNavigator();
 
 // ------------------------------------------------------------------
 // Configure the UXRate SDK at app startup.
-// Replace 'mock' with your real API key (uxr_…) from the dashboard.
-// The SDK auto-resolves the backend from the key prefix:
-//   uxr_…      → production
-//   uxr_dev_…  → development
-//   uxr_loc_…  → local
+// Replace YOUR_API_KEY with your real key from the UXRate dashboard.
 // ------------------------------------------------------------------
 function App(): React.JSX.Element {
   useEffect(() => {
+    // Mock service — works immediately without dashboard setup.
+    // Replace with your real API key (uxr_…) for live surveys; the SDK
+    // auto-resolves the backend from the key prefix.
     UXRate.configure({
       apiKey: 'mock',
     });
