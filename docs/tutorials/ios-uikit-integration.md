@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.8.1 -->
+<!-- iOS SDK v0.8.2 -->
 
 # UIKit Integration Tutorial
 
