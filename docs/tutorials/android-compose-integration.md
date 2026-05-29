@@ -1,4 +1,4 @@
-<!-- Android SDK v0.8.1 -->
+<!-- Android SDK v0.8.2 -->
 
 # Jetpack Compose Integration
 
