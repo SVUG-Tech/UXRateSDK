@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.8.0 -->
+<!-- iOS SDK v0.8.1 -->
 
 # Installation
 
