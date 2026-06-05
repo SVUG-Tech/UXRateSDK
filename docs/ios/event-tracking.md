@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.8.2 -->
+<!-- iOS SDK v0.8.3 -->
 
 # Event Tracking — iOS
 
