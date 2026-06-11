@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.8.3 -->
+<!-- iOS SDK v0.8.4 -->
 
 # API Reference
 
