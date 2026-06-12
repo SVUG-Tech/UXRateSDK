@@ -199,19 +199,18 @@ UXRate.configure(
 ### Configuration Options
 
 ```kotlin
-import com.uxrate.sdk.models.OverlapStrategy
 import com.uxrate.sdk.models.SDKTheme
 
 UXRate.configure(
     application = this,
-    apiKey = "uxr_xxx",
-    baseURL = "https://app.uxrate.com",           // Custom backend URL
-    autoTrackScreens = true,                       // Auto-track Activity names
-    useMockService = false,                        // Mock data for development
-    overlapStrategy = OverlapStrategy.SHOW_FIRST,  // Multiple survey resolution
-    theme = SDKTheme.AUTO                          // Color scheme: AUTO, LIGHT, DARK
+    apiKey = "uxr_xxx",         // backend auto-resolved from key prefix
+    autoTrackScreens = true,    // Auto-track Activity names
+    theme = SDKTheme.AUTO       // Color scheme: AUTO, LIGHT, DARK
 )
 ```
+
+When multiple studies match the same screen, the highest-priority study
+(set in the panel) is shown; ties go to the newest study.
 
 ### User Identification (Android)
 
@@ -283,13 +282,11 @@ Surveys are shown based on rules configured in the UXRate dashboard. The SDK eva
 
 ## Development & Testing
 
-Use `useMockService: true` to get a local mock survey response without a real API key or network connection:
+Use a development API key (`uxr_dev_…`) from the dashboard's dev environment — the SDK auto-resolves the backend from the key prefix, so the same code runs against dev and production:
 
 ```swift
-UXRate.configure(apiKey: "demo", useMockService: true)
+UXRate.configure(apiKey: "uxr_dev_xxx")
 ```
-
-The mock service returns a canned survey that triggers on any screen, so you can verify the full UI flow immediately.
 
 ---
 
@@ -317,7 +314,7 @@ import 'package:flutter_uxrate/flutter_uxrate.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await UXRate.configure(apiKey: 'uxr_xxx', useMockService: false);
+  await UXRate.configure(apiKey: 'uxr_xxx');
   await UXRate.identify(userId: 'user-123', properties: {'plan': 'pro'});
   runApp(const MyApp());
 }
@@ -480,5 +477,3 @@ UXRate.track({ event: 'purchase_complete' });
 **Screen not detected in single-Activity Compose apps (Android)**
 - Single-Activity apps with Navigation Compose use one Activity — auto-tracking sees only the Activity name. Use `UXRate.setScreen("Name")` via `LaunchedEffect` in each screen composable.
 
-**Banner visible on every screen in mock mode**
-- Expected behaviour: `useMockService: true` returns a rule that matches all screens. Switch to a real API key when you want rule-filtered display.
