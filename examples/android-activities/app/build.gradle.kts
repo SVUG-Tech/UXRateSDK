@@ -38,7 +38,7 @@ android {
 
 dependencies {
     // UXRate SDK (local project reference for development)
-    implementation("com.uxrate:uxrate-sdk:0.8.3")
+    implementation("com.uxrate:uxrate-sdk:0.9.0")
 
     // Compose (for Activity UI — no navigation-compose needed)
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
