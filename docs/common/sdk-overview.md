@@ -17,6 +17,5 @@ Once set up, surveys are delivered automatically based on trigger rules you conf
 |-----------|-------------|
 | `apiKey` | Your UXRate API key (starts with `uxr_`). Required. |
 | `autoTrackScreens` | Auto-detect screen changes from native view controllers / activities. Defaults to `true` on iOS/Android, `false` on Flutter/React Native (since they run in a single native view). |
-| `useMockService` | Use a built-in mock backend for development and testing. |
-| `overlapStrategy` | How to resolve multiple surveys matching the same screen: show first, last, random, or none. |
+| `priority` | When multiple studies match the same screen, the highest-priority study (panel setting) is shown; ties go to the newest study. |
 | `theme` | SDK UI color scheme: auto (follows system), light, or dark. |
