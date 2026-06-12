@@ -6,10 +6,9 @@ Get UXRate running in your React Native app in four steps.
 
 Call `configure` once at app startup, typically in your root `App.tsx`:
 
-**Quick test with mock surveys (no backend needed):**
 
 ```tsx
-UXRate.configure({ apiKey: 'mock' });
+UXRate.configure({ apiKey: 'uxr_your_api_key' });
 ```
 
 **Production / development / local:**

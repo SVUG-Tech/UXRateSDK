@@ -12,11 +12,10 @@ const Stack = createNativeStackNavigator();
 // ------------------------------------------------------------------
 function App(): React.JSX.Element {
   useEffect(() => {
-    // Mock service — works immediately without dashboard setup.
     // Replace with your real API key (uxr_…) for live surveys; the SDK
     // auto-resolves the backend from the key prefix.
     UXRate.configure({
-      apiKey: 'mock',
+      apiKey: 'uxr_your_api_key',
     });
   }, []);
 

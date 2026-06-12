@@ -28,15 +28,13 @@ All methods return `Promise<void>`.
 interface ConfigureOptions {
   apiKey: string;
   autoTrackScreens?: boolean;
-  mockScreens?: string[];
 }
 ```
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `apiKey` | `string` | Yes | Your UXRate API key, or `'mock'` for the in-memory mock service. The backend is auto-resolved from the key prefix: `uxr_…` → production, `uxr_dev_…` → development, `uxr_loc_…` → local. |
+| `apiKey` | `string` | Yes | Your UXRate API key. The backend is auto-resolved from the key prefix: `uxr_…` → production, `uxr_dev_…` → development, `uxr_loc_…` → local. |
 | `autoTrackScreens` | `boolean` | No | Enable native auto screen tracking. In React Native apps manual `setScreen` calls are preferred. |
-| `mockScreens` | `string[]` | No | Screen names for mock survey targeting. Only used when `apiKey` is `'mock'`. |
 
 ---
 
