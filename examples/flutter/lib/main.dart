@@ -4,11 +4,10 @@ import 'package:flutter_uxrate/flutter_uxrate.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Mock service — works immediately without dashboard setup.
   // Replace with your real API key (uxr_…) for live surveys; the SDK
   // auto-resolves the backend from the key prefix.
   await UXRate.configure(
-    apiKey: 'mock',
+    apiKey: 'uxr_your_api_key',
   );
 
   runApp(const ExampleApp());
