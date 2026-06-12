@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         // Mock service — works immediately without dashboard setup.
         // Replace with your real API key (uxr_…) for live surveys.
-        UXRate.configure(apiKey: "mock")
+        UXRate.configure(apiKey: "uxr_your_api_key")
         return true
     }
 

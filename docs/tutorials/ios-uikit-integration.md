@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.8.4 -->
+<!-- iOS SDK v0.9.0 -->
 
 # UIKit Integration Tutorial
 
@@ -136,7 +136,6 @@ Customize SDK behavior:
 UXRate.configure(
     apiKey: "uxr_your_api_key",
     autoTrackScreens: true,         // set false to disable swizzling
-    overlapStrategy: .showFirst,    // .showFirst, .showLast, .showRandom, .showNone
     theme: .auto                    // .auto, .light, .dark
 )
 ```

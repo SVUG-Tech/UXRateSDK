@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.8.4 -->
+<!-- iOS SDK v0.9.0 -->
 
 # SwiftUI Integration Tutorial
 
@@ -150,7 +150,6 @@ Customize SDK behavior in the `configure` call:
 UXRate.configure(
     apiKey: "uxr_your_api_key",
     autoTrackScreens: true,         // auto-detect UIKit screen names
-    overlapStrategy: .showFirst,    // how to handle multiple matching surveys
     theme: .auto                    // .auto, .light, or .dark
 )
 ```

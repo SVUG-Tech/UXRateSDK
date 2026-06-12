@@ -11,12 +11,10 @@ import UXRateSDK
 @main
 struct UXRateDemoApp: App {
     init() {
-        // Mock service — works immediately without dashboard setup.
-        // Replace `apiKey: "mock"` with your real API key (uxr_…) for live surveys;
-        // the SDK auto-resolves the backend from the key prefix.
+        // Use your API key from the dashboard; the SDK auto-resolves
+        // the backend from the key prefix (uxr_… / uxr_dev_… / uxr_loc_…).
         UXRate.configure(
-            apiKey: "mock",
-            overlapStrategy: .showLast
+            apiKey: "uxr_your_api_key"
         )
 
         UXRate.loggingEnabled = true

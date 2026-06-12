@@ -1,4 +1,4 @@
-<!-- iOS SDK v0.8.4 -->
+<!-- iOS SDK v0.9.0 -->
 
 # Quick Start
 
@@ -11,7 +11,7 @@ Call `UXRate.configure` as early as possible in your app lifecycle.
 **Quick test with mock surveys (no backend needed):**
 
 ```swift
-UXRate.configure(apiKey: "mock")
+UXRate.configure(apiKey: "uxr_your_api_key")
 ```
 
 **Production / development / local:**
