@@ -1,4 +1,4 @@
-<!-- Android SDK v0.9.0 -->
+<!-- Android SDK v0.9.1 -->
 
 # Session Replay — Android
 

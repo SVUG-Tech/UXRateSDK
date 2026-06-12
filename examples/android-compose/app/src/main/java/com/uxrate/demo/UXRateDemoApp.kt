@@ -15,12 +15,9 @@ class UXRateDemoApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // Mock service — works immediately without dashboard setup.
-        // Replace `apiKey = "mock"` with your real API key (uxr_…) for live surveys;
-        // the SDK auto-resolves the backend from the key prefix.
         UXRate.configure(
             application = this,
-            apiKey = "mock"
+            apiKey = "uxr_your_api_key"
         )
 
         UXRate.loggingEnabled = true

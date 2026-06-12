@@ -13,10 +13,9 @@ import com.uxrate.sdk.UXRate
 class UXRateDemoApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        // Mock service — works immediately without dashboard setup.
-        UXRate.configure(
+                UXRate.configure(
             application = this,
-            apiKey = "mock",
+            apiKey = "uxr_your_api_key",
             autoTrackScreens = true,
         )
         UXRate.loggingEnabled = true
